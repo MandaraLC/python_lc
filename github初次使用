@@ -1,0 +1,20 @@
+1.创建仓库 https://github.com/new
+填写仓库名称Repository name：python_lc
+填写描述（可选）：Description
+选择public private
+点击  Create repository
+得到：https://github.com/MandaraLC/python_lc.git
+
+2.在本地创建一个文件夹：如 Github_code
+
+3.在文件夹中右键打开Git bash
+
+4.执行命令
+git init
+git remote add origin https://github.com/MandaraLC/python_lc.git
+git add .
+git commit -m "first commit"
+git push origin master
+
+#GitHub代码上传失败的解决方法
+https://blog.csdn.net/weixin_43624626/article/details/123257465

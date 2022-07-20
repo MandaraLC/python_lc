@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>测试python接收post数据</title>
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+	<button type="button" onclick="doit()">提交</button>
+</body>
+<script type="text/javascript">
+	function doit(){
+		$.ajax( {
+            type:"GET", //POST GET
+            url:"http://127.0.0.1:8888/username",
+            dataType:"json",
+            data:{
+                "first_name":"liu",
+                "last_name":"cheng"
+            },
+            success:function(data, textStatus){
+            	console.log(data);
+            	console.log(textStatus);
+            },
+            error:function(XMLResponse){
+            	console.log("error");
+            	console.log(XMLResponse);
+            	console.log(XMLResponse.responseText);
+            }
+        });
+	}
+</script>
+</html>

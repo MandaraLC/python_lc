@@ -1,0 +1,44 @@
+首先要安装scrapy模块
+pip install scrapy -i https://pypi.douban.com/simple
+然后cd到某个目录
+
+【1.创建爬虫项目】
+scrapy startproject 项目名称
+scrapy startproject scrapyspider
+scrapy startproject bandaispider
+
+cd baidu
+
+【2.创建爬虫应用】
+scrapy genspider baidu www.baidu.com
+scrapy genspider maoyan www.maoyan.com
+scrapy genspider bandai p-bandai.jp
+scrapy genspider bandaitwo p-bandai.jp
+scrapy genspider 【应用名称】 【要爬取的链接】
+执行该命令后，会在baidu/spider/创建baidu.py
+
+【3.运行单独爬虫应用】
+scrapy crawl baidu
+scrapy crawl bandai
+【4.展示爬虫应用列表】
+scrapy list
+
+
+【文件说明】
+scrapy.cfg  项目的主配置信息。（真正爬虫相关的配置信息在settings.py文件中）
+items.py    设置数据存储模板，用于结构化数据，如：Django的Model
+pipelines    数据处理行为，如：一般结构化的数据持久化
+settings.py 配置文件，如：递归的层数、并发数，延迟下载等
+spiders      爬虫目录，如：创建文件，编写爬虫规则
+
+【运行项目】
+与scrapy.cfg用目录创建一个main.py
+文件内容是：
+from scrapy import cmdline
+cmdline.execute("scrapy crawl maoyan".split())
+
+【运行scrapy之后只显示想要打印的结果，只想看spiders/maoyan.py的打印信息】
+在settings.py中
+ROBOTSTXT_OBEY = False
+下面添加
+LOG_LEVEL = "WARNING"

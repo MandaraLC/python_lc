@@ -1,0 +1,4 @@
+2022-04-06 14:52:23,954 - python日志log.py [line:6] - INFO - 开启破解验证码任务
+2022-04-06 14:52:41,604 - python日志log.py [line:6] - INFO - 开启破解验证码任务
+2022-04-06 14:54:04,888 - python日志log.py [line:6] - INFO - 我是提示信息
+2022-04-06 14:54:04,888 - python日志log.py [line:8] - ERROR - 我是错误信息
