@@ -8,14 +8,43 @@ from lxml import etree
 
 class Caijing:
     #初始化
-    def __init__(self, filepath):
-        self.filepath = filepath  # excel储存路径
+    def __init__(self):
         self.sheetnames = ['红球独胆', '红球双胆', '红球三胆', '红球12码', '红球20码', '红球25码', '红球杀三码', '红球杀六码',
                            '红球龙头两码', '红球凤尾两码', '蓝球定三码','蓝球定五码', '蓝球杀五码']
+        ycqihao = self.getycqihao()
+        filename = f'yc{ycqihao}_数据{time.strftime("%Y-%m-%d", time.localtime(time.time()))}.xlsx'
+        self.filepath = f'./excel/{filename}'
+
+        self.replyfile = f'./data/yc{ycqihao}_重复个数{time.strftime("%Y-%m-%d", time.localtime(time.time()))}.txt'
+        try:
+            os.remove(self.filepath)
+            os.remove(self.replyfile)
+        except:
+            pass
 
     def join_list(self, item):
         """处理列表到字符串"""
         return ",".join(item)
+
+    #获取所预测的期号
+    def getycqihao(self):
+        header = {
+            "Host": "datachart.500.com",
+            "Content-Type": "text/html; charset=gb2312",
+            "Connection": "keep-alive",
+            "Upgrade-Insecure-Requests": "1",
+            "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3861.400 QQBrowser/10.7.4313.400",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Language": "zh-CN,zh;q=0.9"
+        }
+        # ssq
+        url1 = 'https://datachart.500.com/ssq/history/history.shtml'
+
+        respone1 = requests.get(url=url1, headers=header)
+        html = etree.HTML(respone1.text)
+        qihao = self.join_list(html.xpath("//input[@id='end']/@value"))
+        return int(qihao)+1
 
     #获取每个预测种类的数据
     def getdatanums(self):
@@ -143,7 +172,7 @@ class Caijing:
             desc_data = sorted(datajson.items(), key=lambda x: x[1], reverse=True)
             if desc_data:
                 print(i, "：", desc_data)
-                fileInput = open(f'./data/重复个数{time.strftime("%Y-%m-%d", time.localtime(time.time()))}.txt', "a")
+                fileInput = open(self.replyfile, "a")
                 fileInput.write(f"{i}：{str(desc_data)}\n")
 
     #写入文件
