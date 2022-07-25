@@ -14,7 +14,7 @@ git init
 git remote add origin https://github.com/MandaraLC/python_lc.git
 git add .
 git commit -m "first commit"
-git push origin master
+git push origin master 
 
 #GitHub代码上传失败的解决方法
 https://blog.csdn.net/weixin_43624626/article/details/123257465
