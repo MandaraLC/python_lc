@@ -5,3 +5,5 @@ caijingobj = Caijing()
 caijingobj.initexcel()
 #执行程序
 caijingobj.getdatanums()
+
+#08 12 13 14 19 20
