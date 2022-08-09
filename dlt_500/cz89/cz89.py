@@ -68,7 +68,7 @@ class Cz89:
             html = etree.HTML(respone_get_data.text)
 
             items = html.xpath("//ul[@class='commenList']/li")
-            items.pop(0)
+            # items.pop(0)
             for item in items:
                 text = self.join_list(item.xpath("./a/text()"))
                 href = self.join_list(item.xpath("./a/@href"))
@@ -101,10 +101,10 @@ class Cz89:
             for i in range(len(items)):
                 # print(f"第{i+1}个元素")
                 item = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/text()"))
-                time = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/time/text()"))
+                time0 = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/time/text()"))
                 if item:
-                    if time:
-                        fileInput.write(f"{item}{time}\n")
+                    if time0:
+                        fileInput.write(f"{item}{time0}\n")
                     else:
                         fileInput.write(f"{item}\n")
             #将数据写入文件

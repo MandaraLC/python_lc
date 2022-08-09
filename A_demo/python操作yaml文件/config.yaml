@@ -1,0 +1,49 @@
+webdrive:
+  # chrome_webdrive: C:\Users\yang\py_project\chromedriver.exe
+  # stealth_js: C:\Users\yang\py_project\stealth.min.js
+  chrome_webdrive: C:\Users\ingram_2\Documents\chromedriver.exe
+  stealth_js: C:\Users\ingram_2\py_project\stealth.min.js
+  timeout: 15
+  height: 1366
+  width: 768
+
+sleep_time:
+  2
+config_filename:
+  配置.xlsx
+
+retry:
+  8
+
+result_file_info:
+  result_title_name:
+  - 账号
+  - 会员级别
+  - 会员星级
+  - 现有积分
+  - 日期
+  - 备注
+  result_dir:
+    结果目录
+
+sendmail_info:
+  yglit_config:
+    email_me: ingram@ingram-net.com
+    email_password: ing123!@#
+    email_host: smtp.qiye.aliyun.com
+    email_port: 465
+  send_data:
+    to:
+      - zhaoyingyang@ingram-net.com
+      - chenyajing@ingram-net.com
+      - technology@ingram-net.com
+      - linmengwei@ingram-net.com
+      - duanyu@ingram-net.com
+    title:
+    content:
+    file_address:
+
+tamashii_html:
+  home_page: https://club.tamashii.jp/menus/
+  info_page: https://club.tamashii.jp/menus/mypage/
+  logout_page: https://club.tamashii.jp/menus/logout_conf
