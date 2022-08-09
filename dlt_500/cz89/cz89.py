@@ -9,16 +9,25 @@ from lxml import etree
 class Cz89:
     #初始化
     def __init__(self):
-        self.sheetnames = ['红球独胆', '红球双胆', '红球三胆', '红球12码', '红球20码', '红球25码', '红球杀三码', '红球杀六码',
-                           '红球龙头两码', '红球凤尾两码', '蓝球定三码','蓝球定五码', '蓝球杀五码']
+        self.headers = {
+            "accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "accept-encoding":"gzip, deflate, br",
+            "accept-language":"zh-CN,zh;q=0.9",
+            "cache-control":"max-age=0",
+            "referer":"https://m.cz89.com/",
+            "sec-ch-ua-mobile":"?0",
+            "sec-fetch-dest":"document",
+            "sec-fetch-mode":"navigate",
+            "sec-fetch-site":"same-origin",
+            "sec-fetch-user":"?1",
+            "upgrade-insecure-requests":"1",
+            "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36"
+        }
         ycqihao = self.getycqihao()
-        filename = f'yc{ycqihao}_数据{time.strftime("%Y-%m-%d", time.localtime(time.time()))}.xlsx'
-        self.filepath = f'./excel/{filename}'
-
-        self.replyfile = f'./data/yc{ycqihao}_重复个数{time.strftime("%Y-%m-%d", time.localtime(time.time()))}.txt'
+        filename = f'yc{ycqihao}_数据{time.strftime("%Y-%m-%d", time.localtime(time.time()))}.txt'
+        self.filepath = f'./data/{filename}'
         try:
             os.remove(self.filepath)
-            os.remove(self.replyfile)
         except:
             pass
 
@@ -48,132 +57,59 @@ class Cz89:
 
     #获取每个预测种类的数据
     def getdatanums(self):
-        get_data_api = 'https://m.cjcp.com.cn/index.php?m=Yuce&a=getdatanums'
-        # 25-25hongdd 20-20hongdd 12-hqshierma 1-hongqdudan 2-hqshuangdan 3-hqsandan k3-hqshasanma k6-shalh longtou2-hqltliangma
-        #fengwei2-hqfwliangma lan3-smdl lan5-lqdingwuma lankill5-shawl
-        # zbname_arr = ['25hongdd', '20hongdd', 'hqshierma', 'hongqdudan', 'hqshuangdan', 'hqsandan', 'hqshasanma',
-        #               'shalh', 'hqltliangma', 'hqfwliangma', 'smdl', 'lqdingwuma', 'shawl']
-        zbname_arr = ['25hongdd']
 
-        headers = {
-            "Accept":"application/json, text/javascript, */*; q=0.01",
-            "Accept-Encoding":"gzip, deflate, br",
-            "Accept-Language":"zh-CN,zh;q=0.9",
-            "Connection":"keep-alive",
-            "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8",
-            "Host":"m.cjcp.com.cn",
-            "Origin":"https://m.cjcp.com.cn",
-            "Referer":"https://m.cjcp.com.cn/zhuanjia/ssq/",
-            "sec-ch-ua-mobile":"?0",
-            "Sec-Fetch-Dest":"empty",
-            "Sec-Fetch-Mode":"cors",
-            "Sec-Fetch-Site":"same-origin",
-            "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36",
-            "X-Requested-With":"XMLHttpRequest"
-        }
         new_data = [] #生成的新数组
 
-        for zb in zbname_arr:
-            print('zbname：', zb)
-            for page in range(10):
-                post_data = {
-                    "lotteryid": "1",
-                    "childid": "4",
-                    "zbname": zb,  # 20hongdd
-                    #"names": "红球25码",
-                    "sformf": "1",  # 1-免费 2-收费
-                    "page": page+1  # 页数
-                }
+        qihao = str(self.getycqihao())
+        print("预测期号：", qihao)
+        for page in range(10):
+            get_data_api = f'https://m.cz89.com/ssq/item_8.htm?tdsourcetag=s_pcqq_aiomsg&p={page+1}'
+            respone_get_data = requests.get(url=get_data_api, headers=self.headers)
+            html = etree.HTML(respone_get_data.text)
 
-                respone_get_data = requests.post(url=get_data_api, data=post_data, headers=headers)
-                jsons = json.loads(respone_get_data.text)
-                print(f'第{page+1}页数据：', jsons)
-                if jsons:
-                    for data in jsons:
-                        if data['aid'] is not None:
-                            new_data_json = {
-                                'userid':data['userid'],
-                                'expertname':data['expertname'],
-                                'aid':data['aid'],
-                                'qs':data['qs'],
-                                'lotteryid':data['lotteryid'],
-                                'zhibiaoval':zb
-                            }
-                            new_data.append(new_data_json)
-                            # fileInput = open(f"./data/{zb}.txt", "a")
-                            # fileInput.write(str(new_data_json)+ "\n")
-                    time.sleep(0.5)
-                else:
-                    break
-            print("============================================")
+            items = html.xpath("//ul[@class='commenList']/li")
+            items.pop(0)
+            for item in items:
+                text = self.join_list(item.xpath("./a/text()"))
+                href = self.join_list(item.xpath("./a/@href"))
+                if text.find(qihao[-2:]) >= 0:
+                    # print(text, href)
+                    new_data.append({
+                        'href':href,
+                        'text':text
+                    })
+            # if len(new_data) == 0:
+            #     break
+        print(f"共{len(new_data)}条数据 ==>", new_data)
         self.getdedaildata(new_data)
 
     #进入详情页获取数据
     def getdedaildata(self, new_data):
         print(f"共{len(new_data)}条数据，数据获取完成！以下是访问详情页面，并将数据写excel中...")
-        dedail_page_header = {
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "Accept-Encoding": "gzip, deflate, br",
-            "Accept-Language": "zh-CN,zh;q=0.9",
-            "Cache-Control": "max-age=0",
-            "Connection": "keep-alive",
-            "Host": "m.cjcp.com.cn",
-            "Referer": "https://m.cjcp.com.cn",
-            "sec-ch-ua-mobile": "?0",
-            "Sec-Fetch-Dest": "document",
-            "Sec-Fetch-Mode": "navigate",
-            "Sec-Fetch-Site": "same-origin",
-            "Sec-Fetch-User": "?1",
-            "Upgrade-Insecure-Requests": "1",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36"
-        }
         for data in new_data:
-            detail_page_url = f"https://m.cjcp.com.cn/index.php?m=Recommend&a=wzListOne&type={data['expertname']}&zjid={data['aid']}&cb=0"
-            print("当前访问：", data['expertname'], detail_page_url)
-            respone_detail_data = requests.get(url=detail_page_url, headers=dedail_page_header)
+            detail_page_url = f"https://m.cz89.com{data['href']}"
+            print("当前访问：", data['text'], detail_page_url)
+
+            respone_detail_data = requests.get(url=detail_page_url, headers=self.headers)
             html = etree.HTML(respone_detail_data.text)
-            items = html.xpath("//div[@class='yc_table']/table/tbody/tr")
-            for item in items:
-                zbname = item.xpath("./td[1]/text()")
-                values = item.xpath("./td[2]/em/text()")
-                if zbname:
-                    if len(values) == 0:
-                        values = item.xpath("./td[2]/span/text()")
 
-                    self.excel(self.join_list(zbname), data['expertname'], self.join_list(values))
-        #获取各个元素的重复个数
-        print("===========================================")
-        self.getrepeatdata_count()
+            items = html.xpath("//article[@class='article']/p")
+            fileInput = open(self.filepath, "a")
+            fileInput.write(f"当前访问：{data['text']}\t{detail_page_url}\n")
 
-    #获取数据的重复个数
-    def getrepeatdata_count(self):
-        print("以下是获取各个sheet中的重复数据的个数...")
-        excel = load_workbook(self.filepath)
-        all_sheet = excel.sheetnames
-        for i in all_sheet:
-            old_order = []
-            for column in excel[i].iter_cols():
-                for cell2 in column:
-
-                    if cell2.value is not None and cell2.row > 1 and cell2.column == 2:
-                        # print(cell2.row, cell2.column, cell2.value)
-                        if cell2.value.find(",") >= 0:
-                            split0 = cell2.value.split(",")
-                            for a in split0:
-                                old_order.append(a)
-                        else:
-                            old_order.append(cell2.value)
-
-            myset = set(old_order)
-            datajson = {}
-            for item in myset:
-                datajson[item] = old_order.count(item)
-            # 降序排序
-            desc_data = sorted(datajson.items(), key=lambda x: x[1], reverse=True)
-            if desc_data:
-                print(i, "：", desc_data)
-                fileInput = open(self.replyfile, "a")
-                fileInput.write(f"{i}：{str(desc_data)}\n")
+            print(f"共{len(items)}个p元素")
+            for i in range(len(items)):
+                # print(f"第{i+1}个元素")
+                item = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/text()"))
+                time = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/time/text()"))
+                if item:
+                    if time:
+                        fileInput.write(f"{item}{time}\n")
+                    else:
+                        fileInput.write(f"{item}\n")
+            #将数据写入文件
+            fileInput.write(f"===================================\n")
+            print("============================")
 
     #写入文件
     def excel(self, name, expertname, value):
