@@ -7,8 +7,7 @@ yum install docker
 
 3、启动docker服务器
 systemctl start docker
-
-4、设置开机自启动
+设置开机自启动
 systemctl enable docker
 
 5、查看docker版本
@@ -28,7 +27,7 @@ vi /etc/docker/daemon.json
 {
   "registry-mirrors": [
     "https://registry.docker-cn.com"
-  ]# 该地址为加速器地址，需要更换的时候只需更换地址即可
+  ]
 }
 然后重启服务：
 systemctl daemon-reload
@@ -43,7 +42,7 @@ Registry Mirrors:
 docker pull nginx
 
 8.运行
-docker run -it --rm --name nginx-test -v /data/docker-test:/data -p 8088:8088 docker.io/nginx /bin/bash
+docker run -it --rm --name nginx-test -v /data/docker-test:/data -p 80:80 docker.io/nginx /bin/bash
 进入容器ls遇到问题
 原因：
     是CentOS7中的安全模块selinux把权限禁掉了，至少有以下三种方式解决挂载的目录没有权限的问题
@@ -53,3 +52,8 @@ docker run -it --rm --name nginx-test -v /data/docker-test:/data -p 8088:8088 do
     2.临时关闭selinux：
     setenforce 0
     3.添加selinux规则，改变要挂载的目录的安全性文本
+
+docker exec -it 容器名或containerid /bin/bash
+容器中安装vim
+apt-get update
+apt-get install vim

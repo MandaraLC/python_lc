@@ -60,26 +60,27 @@ class Tianqi:
         new_data = [] #生成的新数组
         qihao = str(self.getycqihao())
         print("预测期号：", qihao)
-        for page in range(10):
+        for page in range(5):
             get_data_api = f'https://www.800820.net/ssq/list_38.html?p={page+1}'
+            print(get_data_api)
             respone_get_data = requests.get(url=get_data_api, headers=self.headers)
             html = etree.HTML(respone_get_data.text)
 
             items = html.xpath("//div[@class='info-list']/div[@class='list-type']")
             # items.pop(0)
             for item in items:
-                text = self.join_list(item.xpath("./div[@class='item']//a/text()"))
-                href = self.join_list(item.xpath("./div[@class='item']//a/@href"))
-                if text.find(qihao[-2:]) >= 0:
-                    print(text, href)
-                    new_data.append({
-                        'href':href,
-                        'text':text
-                    })
-            # if len(new_data) == 0:
-            #     break
+                for i in range(6):
+                    # print(f"./div[@class='item'][{i+1}]//a/text()")
+                    text = self.join_list(item.xpath(f"./div[@class='item'][{i+1}]//a/text()"))
+                    href = self.join_list(item.xpath(f"./div[@class='item'][{i+1}]//a/@href"))
+                    if text.find(qihao[-2:]) >= 0:
+                        print(text, href)
+                        new_data.append({
+                            'href':href,
+                            'text':text
+                        })
         print(f"共{len(new_data)}条数据 ==>", new_data)
-        # self.getdedaildata(new_data)
+        self.getdedaildata(new_data)
 
     #进入详情页获取数据
     def getdedaildata(self, new_data):
@@ -91,21 +92,15 @@ class Tianqi:
             respone_detail_data = requests.get(url=detail_page_url, headers=self.headers)
             html = etree.HTML(respone_detail_data.text)
 
-            items = html.xpath("//article[@class='article']/p")
-            fileInput = open(self.filepath, "a")
-            fileInput.write(f"当前访问：{data['text']}\t{detail_page_url}\n")
-
-            print(f"共{len(items)}个p元素")
-            for i in range(len(items)):
-                # print(f"第{i+1}个元素")
-                item = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/text()"))
-                time0 = self.join_list(html.xpath(f"//article[@class='article']/p[{i+1}]/time/text()"))
-                if item:
-                    if time0:
-                        fileInput.write(f"{item}{time0}\n")
-                    else:
-                        fileInput.write(f"{item}\n")
-            #将数据写入文件
+            try:
+                items = html.xpath("//div[@class='main-part']/text()")
+                fileInput = open(self.filepath, "a")
+                fileInput.write(f"当前访问：{data['text']}\t{detail_page_url}\n")
+                data = self.join_list(items).replace('<br/>', "\n")
+                fileInput.write(f"{data}\n");
+            except Exception as e:
+                print("报错", e)
+            # #将数据写入文件
             fileInput.write(f"===================================\n")
             print("============================")
 
