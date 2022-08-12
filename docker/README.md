@@ -10,12 +10,15 @@ docker ps -a
                      docker run ==> 创建并运行一个容器
                             -it ==> 交互模式
                    -p 8760:8760 ==> 端口映射，宿主机端口:容器端口
-   -name docker_yl_maersk_cosco ==> 容器名称
+                           --rm ==> 退出容器时会自动将容器删除
+  --name docker_yl_maersk_cosco ==> 容器名称
+              --privileged=true ==> 在运行容器的时候，给容器加特权
 -v "/home/liucheng/code/:/data" ==> 将容器内指定文件挂载到了宿主机对应位置，宿主机文件存储位置:容器内文件位置
                 --shm-size="2g" ==> 修改docker的共享内存大小
                              -d ==> 守护进程启动方式
           yl_cosco_maersk:1.0.2 ==> 这是镜像，仓库名:tag
                     sh start.sh ==> 进入容器后执行的shell脚本
+                           
 ```
 ```
 其他参数：

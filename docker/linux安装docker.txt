@@ -1,0 +1,55 @@
+1、确保已经安装了gcc
+yum -y install gcc
+yum -y install gcc-c++
+
+2、安装docker
+yum install docker
+
+3、启动docker服务器
+systemctl start docker
+
+4、设置开机自启动
+systemctl enable docker
+
+5、查看docker版本
+docker version
+docker info
+
+6、配置镜像加速器
+(1)Docker 官方提供的中国 registry mirror
+https://registry.docker-cn.com
+
+(2)七牛云加速器
+https://reg-mirror.qiniu.com/
+
+(3)开始配置
+vi /etc/docker/daemon.json
+写入以下内容：
+{
+  "registry-mirrors": [
+    "https://registry.docker-cn.com"
+  ]# 该地址为加速器地址，需要更换的时候只需更换地址即可
+}
+然后重启服务：
+systemctl daemon-reload
+systemctl restart docker
+
+检查加速器是否生效
+命令行执行docker info，如果从结果中看到了如下内容，说明配置成功。
+Registry Mirrors:
+ https://registry.docker-cn.com/
+
+7.拉取镜像
+docker pull nginx
+
+8.运行
+docker run -it --rm --name nginx-test -v /data/docker-test:/data -p 8088:8088 docker.io/nginx /bin/bash
+进入容器ls遇到问题
+原因：
+    是CentOS7中的安全模块selinux把权限禁掉了，至少有以下三种方式解决挂载的目录没有权限的问题
+解决：
+    1.在运行容器的时候，给容器加特权，及加上 --privileged=true 参数：
+    docker run -itd -v /data/dockerfile:/data/dockerfile --privileged=true --name nginx nginx
+    2.临时关闭selinux：
+    setenforce 0
+    3.添加selinux规则，改变要挂载的目录的安全性文本
