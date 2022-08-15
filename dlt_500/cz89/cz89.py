@@ -57,9 +57,7 @@ class Cz89:
 
     #获取每个预测种类的数据
     def getdatanums(self):
-
         new_data = [] #生成的新数组
-
         qihao = str(self.getycqihao())
         print("预测期号：", qihao)
         for page in range(10):
