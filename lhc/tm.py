@@ -11,7 +11,6 @@ sumlist = [] #各单总金额列表
 wincount = 0 #中奖单数
 winsum = 0 #中奖金额
 winlist = [] #中奖金额列表
-
 tema = 10 #特码
 if content:
     for i in content:

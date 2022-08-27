@@ -5,6 +5,7 @@ import os
 from openpyxl import Workbook
 from openpyxl import load_workbook
 from lxml import etree
+import copy
 
 class Cz89:
     #初始化
@@ -54,6 +55,26 @@ class Cz89:
         html = etree.HTML(respone1.text)
         qihao = self.join_list(html.xpath("//input[@id='end']/@value"))
         return int(qihao)+1
+
+    # lst 要组合的列表  l 是几位数的组合
+    def combine(self, lst, l):
+        result = []
+        tmp = [0] * l
+        length = len(lst)
+
+        def next_num(li=0, ni=0):
+            if ni == l:
+                f = open('list.txt', 'a')
+                f.write("".join(str(copy.copy(tmp))))
+                f.write('\n')
+                result.append(copy.copy(tmp))
+                return
+            for lj in range(li, length):
+                tmp[ni] = lst[lj]
+                next_num(lj + 1, ni + 1)
+
+        next_num()
+        return result
 
     #获取每个预测种类的数据
     def getdatanums(self):
