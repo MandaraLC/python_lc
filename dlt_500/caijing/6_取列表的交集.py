@@ -7,7 +7,7 @@ import os
 # data = (a & b)  # 集合c和b中都包含了的元素
 # print(data)
 
-file = "./shaixuan/25shaixuan_data_099.txt"
+file = "./shaixuan/25shaixuan_data_100.txt"
 with open(file, 'r') as f:
     content = f.readlines()
 
@@ -19,24 +19,24 @@ for i in content:
 
 #将列表元素反转
 # alldata.reverse()
-# print(len(alldata))
-# exit()
 
-fileInput = open("./jiaoji/40_jiaoji_data_099.txt", "a")
+filepath = "./jiaoji/100/30_jiaoji_data_100.txt"
 try:
-    os.remove(fileInput)
+    os.remove(filepath)
 except:
     pass
+fileInput = open(filepath, "a")
 
 data = alldata[10]
 for a in range(len(alldata)):
-    if (a+1) <= len(alldata) and len(data) > 0 and a >= 40:
+    if (a + 1) <= len(alldata) and len(data) > 0 and a >= 30:
+    # if (a + 1) <= len(alldata) and len(data) > 0:
         print("列表1：", data)
         print("列表2：", alldata[a+1])
-        fileInput.write(f"列表1：{data}\n")
-        fileInput.write(f"列表2：{alldata[a + 1]}\n")
+        # fileInput.write(f"列表1：{data}\n")
+        # fileInput.write(f"列表2：{alldata[a + 1]}\n")
         data = (data & alldata[a+1])
         print("两个列表交集：", data)
         print("===========================")
         fileInput.write(f"两个列表交集：{data}\n")
-        fileInput.write("===========================\n")
+        # fileInput.write("===========================\n")
