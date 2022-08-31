@@ -7,9 +7,9 @@ def combine(lst, l):
 
     def next_num(li=0, ni=0):
         if ni == l:
-            # f = open('./list/list22099.txt', 'a')
-            # f.write("".join(str(copy.copy(tmp))))
-            # f.write('\n')
+            f = open('./list/list22100.txt', 'a')
+            f.write("".join(str(copy.copy(tmp))))
+            f.write('\n')
             result.append(copy.copy(tmp))
             return
         for lj in range(li, length):
@@ -18,7 +18,7 @@ def combine(lst, l):
     next_num()
     return result
 
-file = "./shaixuan/25shaixuan_data_099.txt"
+file = "./shaixuan/25shaixuan_data_100.txt"
 with open(file, 'r') as f:
     content = f.readlines()
 
@@ -30,7 +30,13 @@ for i in content:
 
 #测试
 # print(list(range(1, 5))) #[1, 2, 3, 4]
-
+#
 # ll = combine(list(range(1, 46)), 10)
 # print(len(ll))
 
+#177100*47=6375600
+for i in content:
+    slipt0 = i.strip().split(" ")
+    slipt1 = slipt0[1].split(",")
+    ll = combine(slipt1, 6)
+    print(len(ll))
