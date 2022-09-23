@@ -12,6 +12,6 @@ except:
 fileInput = open(filepath, "a")
 for i in content:
     if i.find("当前访问") >= 0 or i.find("===") >= 0 or (
-            i.find("02") >= 0 and i.find("06") >= 0 and i.find("07") >= 0 and i.find("15") >= 0 and i.find(
-        "20") >= 0 and i.find("21") >= 0):
+            i.find("04") >= 0 and i.find("16") >= 0 and i.find("18") >= 0 and i.find("19") >= 0 and i.find(
+        "27") >= 0 and i.find("27") >= 0):
         fileInput.write(f"{i.strip()}\n")

@@ -6,7 +6,7 @@ pip install scrapy -i https://pypi.douban.com/simple
 scrapy startproject 项目名称
 scrapy startproject scrapyspider
 scrapy startproject bandaispider
-
+scrapy startproject baidu
 cd baidu
 
 【2.创建爬虫应用】
@@ -15,7 +15,7 @@ scrapy genspider maoyan www.maoyan.com
 scrapy genspider bandai p-bandai.jp
 scrapy genspider bandaitwo p-bandai.jp
 scrapy genspider 【应用名称】 【要爬取的链接】
-执行该命令后，会在baidu/spider/创建baidu.py
+执行该命令后，会在baidu/spiders/创建baidu.py
 
 【3.运行单独爬虫应用】
 scrapy crawl baidu
@@ -36,6 +36,8 @@ spiders      爬虫目录，如：创建文件，编写爬虫规则
 文件内容是：
 from scrapy import cmdline
 cmdline.execute("scrapy crawl maoyan".split())
+
+os.system("scrapy crawl maoyan -a username=参数 -a password=参数")
 
 【运行scrapy之后只显示想要打印的结果，只想看spiders/maoyan.py的打印信息】
 在settings.py中

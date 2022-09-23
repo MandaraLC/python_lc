@@ -1,10 +1,10 @@
 import os
 import scrapy
 import time
-from crawl_haiwai_kc.items import OutputItem
-from crawl_haiwai_kc.items import HaiwaikcORM
+from 万代监测库存.items import OutputItem
+from 万代监测库存.items import HaiwaikcORM
 from scrapy.http import Request
-from crawl_haiwai_kc.tools.send import DingtalkMsgReport
+from 万代监测库存.tools.send import DingtalkMsgReport
 import datetime
 
 

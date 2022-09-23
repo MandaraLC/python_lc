@@ -4,7 +4,7 @@ from sqlalchemy.engine.url import URL
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import func
-from crawl_haiwai_kc.items import HaiwaikcORM, HaiwaikcscORM
+from 万代监测库存.items import HaiwaikcORM, HaiwaikcscORM
 
 import traceback
 import sys

@@ -18,7 +18,7 @@ def combine(lst, l):
     next_num()
     return result
 
-file = "./shaixuan/25shaixuan_data_100.txt"
+file = "shaixuan25/25shaixuan_data_100.txt"
 with open(file, 'r') as f:
     content = f.readlines()
 

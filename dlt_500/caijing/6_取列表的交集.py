@@ -7,7 +7,7 @@ import os
 # data = (a & b)  # 集合c和b中都包含了的元素
 # print(data)
 
-file = "./shaixuan/25shaixuan_data_101.txt"
+file = "shaixuan25/25shaixuan_data_102.txt"
 try:
     with open(file, 'r', encoding="utf-8") as f:
         content = f.readlines()
@@ -22,16 +22,16 @@ for i in content:
     alldata.append(set(slipt1))
 
 #将列表元素反转
-alldata.reverse()
+# alldata.reverse()
 
-filepath = "./jiaoji/101/30_reverse_jiaoji_data_101.txt"
+filepath = "./jiaoji/102/30_jiaoji_data_102.txt"
 try:
     os.remove(filepath)
 except:
     pass
 fileInput = open(filepath, "a")
 
-data = alldata[10]
+data = alldata[0]
 for a in range(len(alldata)):
     if (a + 1) <= len(alldata) and len(data) > 0 and a >= 30:
     # if (a + 1) <= len(alldata) and len(data) > 0:

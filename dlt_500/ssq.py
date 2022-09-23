@@ -54,7 +54,5 @@ for item in trlist:
 #以w的方式打开文件，写入数据
 fileInput = open("data/data_ssq.txt", "w")
 for item in result_list:
-    #fileInput.write(''.join(item['qihao']+":"+item['number'])+"\n")
-    fileInput.write(''.join(item['number']) + "\n")
-
-#将所有预测都计算成组合，然后统计出现次数是10以内的数据。caijin和cz89进行对比
+    fileInput.write(''.join(item['qihao']+":"+item['number'])+"\n")
+    # fileInput.write(''.join(item['number']) + "\n")
