@@ -1,0 +1,9 @@
+Django~=3.2
+djangorestframework~=3.13.1
+django-simpleui~=2022.3.1
+drf-yasg~=1.20.0
+django-cors-headers~=3.11.0
+mysqlclient~=2.1.0
+channels~=3.0.4
+django-filter~=21.1
+uWSGI==2.0.19.1
