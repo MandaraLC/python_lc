@@ -1,0 +1,68 @@
+1.安装django模块
+    pip install django -i https://pypi.douban.com/simple/
+
+2.验证django下载是否成功
+    2.1 pip show django
+    2.2 生成：
+        Name: Django
+        Version: 4.1.1
+        Summary: A high-level Python web framework that encourages rapid development and clean, pragmatic design.
+        Home-page: https://www.djangoproject.com/
+        Author: Django Software Foundation
+        Author-email: foundation@djangoproject.com
+        License: BSD-3-Clause
+        Location: d:\programs\python\python388\lib\site-packages
+        Requires: asgiref, backports.zoneinfo, sqlparse, tzdata
+        Required-by:
+
+3.创建应用和项目
+    3.1 进入到一个目录
+        cd D:\A_myfiles_lc20220228\python_m2\Github_code\django
+
+    3.2 创建helloworld项目
+        django-admin startproject helloworld
+
+    3.3 生成的目录结构如下：
+        最外层的helloworld是容器目录，里面那层helloworld为实际项目目录。
+        manage.py: 一个让你用各种方式管理 Django 项目的命令行工具
+        __init__.py：一个空文件，告诉 Python 这个目录应该被认为是一个 Python 包
+        settings.py：Django 项目的配置文件
+        urls.py：Django 项目的 URL 声明，就像你网站的“目录”
+        asgi.py：作为你的项目的运行在 ASGI 兼容的 Web 服务器上的入口
+        wsgi.py：作为你的项目的运行在 WSGI 兼容的Web服务器上的入口
+
+4.运行项目
+    cd helloworld
+    python manage.py runserver
+    访问：http://127.0.0.1:8000/
+    成功运行项目！
+
+5.创建应用
+    django-admin startapp blog
+    生成blog目录
+
+6.编写试图blog/views.py
+    from django.shortcuts import render
+    from django.http import HttpResponse
+
+    def hello_world(request):
+        return HttpResponse("hello world")
+
+7.创建blog/urls.py，并写入如下代码：
+    from django.urls import path
+    import views
+
+    urlpatterns = [
+        path('', views.hello_world),
+    ]
+
+8.在helloworld/urls.py
+    from django.contrib import admin
+    from django.urls import path,include
+
+    urlpatterns = [
+        path('blog/', include('blog.urls')),
+        # path('admin/', admin.site.urls),
+    ]
+
+    然后访问：http://127.0.0.1:8000/blog/
