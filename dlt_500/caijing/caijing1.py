@@ -42,7 +42,7 @@ class Caijing:
 
     #获取每个预测种类的数据
     def getdatanums(self):
-        get_data_api = 'https://m.cjcp.com.cn/index.php?m=Yuce&a=getdatanums'
+        get_data_api = 'https://www.cjcp.com.cn/index.php?m=Yuce&a=getdatanums'
         # zbname_arr = ['25hongdd']
         zbname_arr = ['hqshasanma']
 
