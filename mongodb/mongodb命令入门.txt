@@ -1,0 +1,35 @@
+1.首先使用navicat链接mongodb数据库
+localhost 27107
+
+//1.查询所有数据的两种写法
+//db.book.find()
+//db.getCollection('book').find()
+
+//2.新增数据的两种方式
+//db.book.insert({'name':'zhangsan'})
+//db.book.save({'name':'lisi', 'age':23})
+//db.book.save({name:'wangwu', age:23}) //键不需要打引号
+
+//3.根据条件查询
+//db.book.find({'name':'zhangsan'})
+//db.getCollection('book').find({'name':'zhangsan'})
+
+//4.删除数据
+//db.book.remove({'name':'zhangsan'}) //条件删除
+//db.book.remove({}) //删除全部
+
+//5.更新数据(前面是条件，后面是要更细的数据)
+//db.book.update({'name':'zhangsan'}, {$set:{'name':'zhangsan666'}})
+//db.book.updateOne({'name':'zhangsan'}, {$set:{'name':'zhangsan777'}}) //更新一条满足条件的
+//db.book.updateMany({'age':23}, {$set:{'age':25}}) //更新所有满足条件的
+
+//6.查询10条数据
+//db.book.find().limit(2)
+
+//7.统计
+//db.book.count() //总记录
+
+//8.排序(按照age排序，1是升序，-1是降序)
+//db.book.find().sort({age:1})
+//skip() 、limit()、sort() 三个放在一起执行的时候，执行的顺序是先 sort(), 然后是skip(),最后是显示 limit()。
+

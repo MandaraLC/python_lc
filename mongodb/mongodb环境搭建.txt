@@ -1,0 +1,10 @@
+参考：https://www.cnblogs.com/TM0831/p/10606624.html
+安装好后：
+    1.将E:\MongoDB\bin加入环境变量
+    2.cmd执行：mongod --dbpath E:\MongoDB\data\db
+    3.运行成功后，E:\MongoDB\data\db下将会创建一些文件，访问127.0.0.1:27017显示：
+      “It looks like you are trying to access MongoDB over HTTP on the native driver port.”表示MongoDB启动成功了
+    4.设置mongodb成自启动：
+        4.1 第1种方法，手动启动：net start mongodb
+        4.2 第2种方法，mongod --dbpath "E:\MongoDB\data\db" --logpath "E:\MongoDB\data\log\mongo.log" -install -serviceName "MongoDB"
+        4.3 如果没有报错的话就说明成功添加到服务里了，可以使用win+R然后输入services.msc命令进行查看
