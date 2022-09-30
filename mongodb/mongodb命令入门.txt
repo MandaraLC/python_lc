@@ -32,4 +32,3 @@ localhost 27107
 //8.排序(按照age排序，1是升序，-1是降序)
 //db.book.find().sort({age:1})
 //skip() 、limit()、sort() 三个放在一起执行的时候，执行的顺序是先 sort(), 然后是skip(),最后是显示 limit()。
-
