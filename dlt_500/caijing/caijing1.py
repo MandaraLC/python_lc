@@ -45,6 +45,7 @@ class Caijing:
         get_data_api = 'https://www.cjcp.com.cn/index.php?m=Yuce&a=getdatanums'
         # zbname_arr = ['25hongdd']
         zbname_arr = ['hqshasanma']
+        # shalh
 
         headers = {
             "Accept":"application/json, text/javascript, */*; q=0.01",

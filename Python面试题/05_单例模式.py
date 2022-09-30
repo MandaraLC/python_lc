@@ -27,5 +27,4 @@ class Singleton(object):
 
 a = Singleton()
 b = Singleton()
-print(a == b) #Ture
-
+print(a == b) # Ture
