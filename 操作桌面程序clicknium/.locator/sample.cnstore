@@ -1,0 +1,1085 @@
+{
+	"id": "08da5e32-36ca-43f8-8091-fffc3f577e2b",
+	"name": "sample",
+	"nodes": [
+		{
+			"id": "08da5e32-3711-4636-8b03-9145ee348284",
+			"name": "notepad",
+			"nodes": [],
+			"locators": [
+				{
+					"id": "08da5e32-3722-4524-8b66-624dff9309d3",
+					"name": "document_15",
+					"filePath": "a4afde58-3485-4f8d-be18-385acae4da0d.png",
+					"imageFilePath": "",
+					"content": {
+						"automationType": "Uia",
+						"processName": {
+							"value": "notepad"
+						},
+						"filePath": {
+							"value": "notepad.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "Notepad"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "*"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"automationId": {
+												"value": "15",
+												"excluded": true
+											},
+											"isPassword": {
+												"value": "False",
+												"excluded": true
+											},
+											"orientation": {
+												"value": "None",
+												"excluded": true
+											},
+											"role": {
+												"value": "document"
+											},
+											"isDirectChild": {
+												"value": "True",
+												"excluded": true
+											},
+											"className": {
+												"value": "Edit",
+												"excluded": true
+											},
+											"controlMetaType": "Uia",
+											"name": {
+												"value": "",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [],
+										"excluded": false
+									}
+								],
+								"excluded": false
+							}
+						]
+					}
+				},
+				{
+					"id": "1768a26d-44b5-4100-9a81-2c3178349ff0",
+					"name": "file",
+					"filePath": "4c3043fc-5618-4a94-8ce0-1cf5915c74d9.jpg",
+					"content": {
+						"automationType": "Uia",
+						"processName": {
+							"value": "Notepad"
+						},
+						"filePath": {
+							"value": "Notepad.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "Notepad"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "*无标题 - 记事本"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"automationId": {
+												"value": "",
+												"excluded": true
+											},
+											"isPassword": {
+												"value": "False",
+												"excluded": true
+											},
+											"orientation": {
+												"value": "None",
+												"excluded": true
+											},
+											"role": {
+												"value": "pane"
+											},
+											"isDirectChild": {
+												"value": "True"
+											},
+											"className": {
+												"value": "Windows.UI.Input.InputSite.WindowClass"
+											},
+											"controlMetaType": "Uia",
+											"name": {
+												"value": "",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [
+											{
+												"identifier": {
+													"automationId": {
+														"value": "MenuBar"
+													},
+													"isPassword": {
+														"value": "False",
+														"excluded": true
+													},
+													"orientation": {
+														"value": "None",
+														"excluded": true
+													},
+													"role": {
+														"value": "menuBar"
+													},
+													"isDirectChild": {
+														"value": "True"
+													},
+													"className": {
+														"value": "",
+														"excluded": true
+													},
+													"controlMetaType": "Uia",
+													"index": {
+														"value": "1",
+														"excluded": true
+													}
+												},
+												"childControls": [
+													{
+														"identifier": {
+															"automationId": {
+																"value": "",
+																"excluded": true
+															},
+															"isPassword": {
+																"value": "False",
+																"excluded": true
+															},
+															"orientation": {
+																"value": "None",
+																"excluded": true
+															},
+															"role": {
+																"value": "menuItem"
+															},
+															"accessKey": {
+																"value": "Alt, F"
+															},
+															"isDirectChild": {
+																"value": "True"
+															},
+															"className": {
+																"value": "Microsoft.UI.Xaml.Controls.MenuBarItem"
+															},
+															"controlMetaType": "Uia",
+															"name": {
+																"value": "文件"
+															},
+															"index": {
+																"value": "1",
+																"excluded": true
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"id": "def817e0-67a0-40eb-b27d-c09a56b93b69",
+					"name": "save",
+					"filePath": "1dafcee6-80b0-4296-be35-d9edf95e5eee.jpg",
+					"content": {
+						"automationType": "Uia",
+						"processName": {
+							"value": "Notepad"
+						},
+						"filePath": {
+							"value": "Notepad.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "Notepad"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "新建 文本文档.txt - 记事本"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"automationId": {
+												"value": "",
+												"excluded": true
+											},
+											"isPassword": {
+												"value": "False",
+												"excluded": true
+											},
+											"orientation": {
+												"value": "None",
+												"excluded": true
+											},
+											"role": {
+												"value": "pane"
+											},
+											"isDirectChild": {
+												"value": "True"
+											},
+											"className": {
+												"value": "Windows.UI.Input.InputSite.WindowClass"
+											},
+											"controlMetaType": "Uia",
+											"name": {
+												"value": "",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [
+											{
+												"identifier": {
+													"automationId": {
+														"value": "",
+														"excluded": true
+													},
+													"isPassword": {
+														"value": "False",
+														"excluded": true
+													},
+													"orientation": {
+														"value": "None",
+														"excluded": true
+													},
+													"role": {
+														"value": "window"
+													},
+													"isDirectChild": {
+														"value": "False",
+														"excluded": true
+													},
+													"className": {
+														"value": "Popup"
+													},
+													"controlMetaType": "Uia",
+													"name": {
+														"value": "弹出窗口"
+													}
+												},
+												"childControls": [
+													{
+														"identifier": {
+															"automationId": {
+																"value": "",
+																"excluded": true
+															},
+															"isPassword": {
+																"value": "False",
+																"excluded": true
+															},
+															"orientation": {
+																"value": "None",
+																"excluded": true
+															},
+															"role": {
+																"value": "menu"
+															},
+															"isDirectChild": {
+																"value": "True"
+															},
+															"className": {
+																"value": "MenuFlyout"
+															},
+															"controlMetaType": "Uia",
+															"name": {
+																"value": "",
+																"excluded": true
+															},
+															"index": {
+																"value": "1",
+																"excluded": true
+															}
+														},
+														"childControls": [
+															{
+																"identifier": {
+																	"automationId": {
+																		"value": "",
+																		"excluded": true
+																	},
+																	"isPassword": {
+																		"value": "False",
+																		"excluded": true
+																	},
+																	"acceleratorKey": {
+																		"value": "Ctrl+S"
+																	},
+																	"orientation": {
+																		"value": "None",
+																		"excluded": true
+																	},
+																	"role": {
+																		"value": "menuItem"
+																	},
+																	"accessKey": {
+																		"value": "Alt, S"
+																	},
+																	"isDirectChild": {
+																		"value": "True"
+																	},
+																	"className": {
+																		"value": "MenuFlyoutItem"
+																	},
+																	"controlMetaType": "Uia",
+																	"name": {
+																		"value": "保存"
+																	},
+																	"index": {
+																		"value": "1",
+																		"excluded": true
+																	}
+																}
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"id": "22f7978f-fc1f-4e80-ac20-e16af664c658",
+					"name": "view",
+					"filePath": "79ffc67b-d77b-4677-8b88-6e866d6792d5.jpg",
+					"content": {
+						"automationType": "Uia",
+						"processName": {
+							"value": "Notepad"
+						},
+						"filePath": {
+							"value": "Notepad.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"automationId": {
+										"value": "",
+										"excluded": true
+									},
+									"isPassword": {
+										"value": "False",
+										"excluded": true
+									},
+									"orientation": {
+										"value": "None",
+										"excluded": true
+									},
+									"role": {
+										"value": "window"
+									},
+									"isDirectChild": {
+										"value": "True"
+									},
+									"className": {
+										"value": "Notepad"
+									},
+									"controlMetaType": "Uia",
+									"name": {
+										"value": "*无标题 - 记事本"
+									},
+									"index": {
+										"value": "1",
+										"excluded": true
+									}
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"automationId": {
+												"value": "",
+												"excluded": true
+											},
+											"isPassword": {
+												"value": "False",
+												"excluded": true
+											},
+											"orientation": {
+												"value": "None",
+												"excluded": true
+											},
+											"role": {
+												"value": "pane"
+											},
+											"isDirectChild": {
+												"value": "True"
+											},
+											"className": {
+												"value": "Windows.UI.Input.InputSite.WindowClass"
+											},
+											"controlMetaType": "Uia",
+											"name": {
+												"value": "",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [
+											{
+												"identifier": {
+													"automationId": {
+														"value": "MenuBar"
+													},
+													"isPassword": {
+														"value": "False",
+														"excluded": true
+													},
+													"orientation": {
+														"value": "None",
+														"excluded": true
+													},
+													"role": {
+														"value": "menuBar"
+													},
+													"isDirectChild": {
+														"value": "True"
+													},
+													"className": {
+														"value": "",
+														"excluded": true
+													},
+													"controlMetaType": "Uia",
+													"index": {
+														"value": "1",
+														"excluded": true
+													}
+												},
+												"childControls": [
+													{
+														"identifier": {
+															"automationId": {
+																"value": "",
+																"excluded": true
+															},
+															"isPassword": {
+																"value": "False",
+																"excluded": true
+															},
+															"orientation": {
+																"value": "None",
+																"excluded": true
+															},
+															"role": {
+																"value": "menuItem"
+															},
+															"accessKey": {
+																"value": "Alt, V"
+															},
+															"isDirectChild": {
+																"value": "True"
+															},
+															"className": {
+																"value": "Microsoft.UI.Xaml.Controls.MenuBarItem"
+															},
+															"controlMetaType": "Uia",
+															"name": {
+																"value": "查看"
+															},
+															"index": {
+																"value": "1",
+																"excluded": true
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "08da5e32-36ce-4bea-8b2a-7b8d8548c1d4",
+			"name": "bing",
+			"nodes": [],
+			"locators": [
+				{
+					"id": "08da5e32-36ef-48af-8e2b-8e6aec6b1ff1",
+					"name": "search_sb_form_q",
+					"filePath": "24e88268-b4b5-4671-a07b-a400e1cbc454.png",
+					"imageFilePath": "",
+					"content": {
+						"automationType": "Edge",
+						"processName": {
+							"value": "msedge"
+						},
+						"filePath": {
+							"value": "msedge.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"role": {
+										"value": "window"
+									},
+									"title": {
+										"value": "Bing",
+										"excluded": true
+									},
+									"url": {
+										"value": "https://*bing.com/",
+										"excluded": false
+									},
+									"className": {
+										"value": "Chrome_WidgetWin_1"
+									},
+									"controlMetaType": "Tab"
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"tag": {
+												"value": "INPUT"
+											},
+											"id": {
+												"value": "sb_form_q"
+											},
+											"type": {
+												"value": "search",
+												"excluded": true
+											},
+											"ancestorId": {
+												"value": "sb_form",
+												"excluded": true
+											},
+											"isLeaf": {
+												"value": "1",
+												"excluded": true
+											},
+											"cssSelector": {
+												"value": "body>div>div>div>main>form>input",
+												"excluded": true
+											},
+											"tableRow": {
+												"value": "-1",
+												"excluded": true
+											},
+											"tableCol": {
+												"value": "-1",
+												"excluded": true
+											},
+											"controlMetaType": "Web",
+											"name": {
+												"value": "q"
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [],
+										"excluded": false
+									}
+								],
+								"excluded": false
+							}
+						]
+					}
+				},
+				{
+					"id": "08da5e32-3701-458d-87c6-cbfded6e9b52",
+					"name": "svg",
+					"filePath": "c5088e07-79bf-427c-99de-a0eb2dfb1893.png",
+					"imageFilePath": "",
+					"content": {
+						"automationType": "Edge",
+						"processName": {
+							"value": "msedge"
+						},
+						"filePath": {
+							"value": "msedge.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"role": {
+										"value": "window"
+									},
+									"title": {
+										"value": "Bing",
+										"excluded": true
+									},
+									"url": {
+										"value": "https://*bing.com/",
+										"excluded": false
+									},
+									"className": {
+										"value": "Chrome_WidgetWin_1"
+									},
+									"controlMetaType": "Tab"
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"tag": {
+												"value": "svg"
+											},
+											"ancestorId": {
+												"value": "search_icon"
+											},
+											"isLeaf": {
+												"value": "0",
+												"excluded": true
+											},
+											"cssSelector": {
+												"value": "body>div>div>div>main>form>label>svg",
+												"excluded": true
+											},
+											"tableRow": {
+												"value": "-1",
+												"excluded": true
+											},
+											"tableCol": {
+												"value": "-1",
+												"excluded": true
+											},
+											"controlMetaType": "Web",
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [],
+										"excluded": false
+									}
+								],
+								"excluded": false
+							}
+						]
+					}
+				},
+				{
+					"id": "08da5e32-370e-4c8c-88c6-02499d29f959",
+					"name": "a_search_result",
+					"filePath": "91974465-c226-44f1-b3a5-15909667afe6.png",
+					"imageFilePath": "",
+					"content": {
+						"automationType": "Edge",
+						"processName": {
+							"value": "msedge"
+						},
+						"filePath": {
+							"value": "msedge.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"role": {
+										"value": "window"
+									},
+									"title": {
+										"value": "* - Search",
+										"excluded": true
+									},
+									"url": {
+										"value": "https://*bing.com/search?*",
+										"excluded": false
+									},
+									"className": {
+										"value": "Chrome_WidgetWin_1"
+									},
+									"controlMetaType": "Tab"
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"tag": {
+												"value": "A"
+											},
+											"ancestorId": {
+												"value": "b_results"
+											},
+											"isLeaf": {
+												"value": "1",
+												"excluded": true
+											},
+											"cssSelector": {
+												"value": "body>div>main>ol>li h2>a",
+												"excluded": false
+											},
+											"sInfo": {
+												"value": "clicknium Â· PyPI",
+												"excluded": true
+											},
+											"tableRow": {
+												"value": "-1",
+												"excluded": true
+											},
+											"tableCol": {
+												"value": "-1",
+												"excluded": true
+											},
+											"href": {
+												"value": "https://www.bing.com/ck/a?!&&p=5f1301e217338228df140238b3d2a021d661cc8b7b0671779127e6b22ce8a549JmltdHM9MTY1NTYwMDIxOCZpZ3VpZD02MjhhYTEwZi1kM2I2LTQ2MmUtYjI5NS1iNDNmOTEwNWU3NWImaW5zaWQ9NTEyOQ&ptn=3&fclid=b8a1677b-ef6a-11ec-88d5-f257ac50a32f&u=a1aHR0cHM6Ly9weXBpLm9yZy9wcm9qZWN0L2NsaWNrbml1bS8&ntb=1",
+												"excluded": true
+											},
+											"controlMetaType": "Web",
+											"index": {
+												"value": "1",
+												"excluded": true
+											}
+										},
+										"childControls": [],
+										"excluded": false
+									}
+								],
+								"excluded": false
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": "21cd020e-8c4a-440d-855a-1803b25fbab5",
+			"name": "baidu",
+			"nodes": [],
+			"locators": [
+				{
+					"id": "39cf638a-16ef-4575-9cc4-8c4cf22b8715",
+					"name": "text_kw",
+					"filePath": "3b9d5e48-31d4-4c9d-b4de-f591129a00e6.jpg",
+					"content": {
+						"automationType": "Chrome",
+						"processName": {
+							"value": "chrome"
+						},
+						"filePath": {
+							"value": "chrome.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"role": {
+										"value": "window"
+									},
+									"title": {
+										"value": "百度一下，你就知道"
+									},
+									"url": {
+										"value": "https://www.baidu.com/",
+										"excluded": true
+									},
+									"className": {
+										"value": "Chrome_WidgetWin_1"
+									},
+									"controlMetaType": "Tab"
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"tag": {
+												"value": "INPUT"
+											},
+											"id": {
+												"value": "kw"
+											},
+											"class": {
+												"value": "s_ipt",
+												"excluded": true
+											},
+											"type": {
+												"value": "text",
+												"excluded": true
+											},
+											"ancestorId": {
+												"value": "s_kw_wrap",
+												"excluded": true
+											},
+											"ancestorName": {
+												"value": "f",
+												"excluded": true
+											},
+											"ancestorClass": {
+												"value": "bg s_ipt_wr new-pmd iptfocus quickdelete-wrap ipthover",
+												"excluded": true
+											},
+											"isLeaf": {
+												"value": "1",
+												"excluded": true
+											},
+											"cssSelector": {
+												"value": "body>div>div>div>div>div>form>span>input",
+												"excluded": true
+											},
+											"tableRow": {
+												"value": "-1",
+												"excluded": true
+											},
+											"tableCol": {
+												"value": "-1",
+												"excluded": true
+											},
+											"controlMetaType": "Web",
+											"name": {
+												"value": "wd",
+												"excluded": true
+											},
+											"index": {
+												"value": "1",
+												"excluded": true
+											},
+											"maxlength": {
+												"isCustom": true,
+												"value": "100",
+												"operator": "equals",
+												"excluded": true
+											},
+											"autocomplete": {
+												"isCustom": true,
+												"value": "off",
+												"operator": "equals",
+												"excluded": true
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				},
+				{
+					"id": "478990c3-459c-47f0-862f-49a4b231b607",
+					"name": "submit_su",
+					"filePath": "7c867bc9-39d0-42fc-82d3-d2b3f1e5a666.jpg",
+					"content": {
+						"automationType": "Chrome",
+						"processName": {
+							"value": "chrome"
+						},
+						"filePath": {
+							"value": "chrome.exe"
+						},
+						"version": {
+							"value": "1.3"
+						},
+						"childControls": [
+							{
+								"identifier": {
+									"role": {
+										"value": "window"
+									},
+									"title": {
+										"value": "百度一下，你就知道"
+									},
+									"url": {
+										"value": "https://www.baidu.com/",
+										"excluded": true
+									},
+									"className": {
+										"value": "Chrome_WidgetWin_1"
+									},
+									"controlMetaType": "Tab"
+								},
+								"childControls": [
+									{
+										"identifier": {
+											"tag": {
+												"value": "INPUT"
+											},
+											"id": {
+												"value": "su"
+											},
+											"class": {
+												"value": "btn self-btn bg s_btn",
+												"excluded": true
+											},
+											"type": {
+												"value": "submit",
+												"excluded": true
+											},
+											"ancestorId": {
+												"value": "s_btn_wr",
+												"excluded": true
+											},
+											"ancestorName": {
+												"value": "f",
+												"excluded": true
+											},
+											"ancestorClass": {
+												"value": "btn_wr s_btn_wr bg",
+												"excluded": true
+											},
+											"isLeaf": {
+												"value": "1",
+												"excluded": true
+											},
+											"cssSelector": {
+												"value": "body>div>div>div>div>div>form>span>input",
+												"excluded": true
+											},
+											"sInfo": {
+												"value": "百度一下",
+												"excluded": true
+											},
+											"tableRow": {
+												"value": "-1",
+												"excluded": true
+											},
+											"tableCol": {
+												"value": "-1",
+												"excluded": true
+											},
+											"controlMetaType": "Web",
+											"index": {
+												"value": "1",
+												"excluded": true
+											},
+											"value": {
+												"isCustom": true,
+												"value": "百度一下",
+												"operator": "equals",
+												"excluded": true
+											}
+										}
+									}
+								]
+							}
+						]
+					}
+				}
+			]
+		}
+	],
+	"locators": []
+}

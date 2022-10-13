@@ -1,0 +1,32 @@
+一.redis的db从db1-db15共16个数据库，每个数据库都有属于自己的空间，不必担心之间的key冲突
+
+二.如何设置redis密码：
+    1.首先启动redis服务，cmd->执行redis-server.exe
+
+    2.连接redis并查看密码：
+    C:\Users\29047>redis-cli -h 127.0.0.1 -p 6379
+    127.0.0.1:6379> config get requirepass
+    1) "requirepass"
+    2) ""
+
+    3.设置密码
+    127.0.0.1:6379> config set requirepass 123456
+    OK
+
+    4.设置密码后查看密码：
+    127.0.0.1:6379> config get requirepass
+    (error) NOAUTH Authentication required.
+    【注意】一旦设置密码，必须先验证通过密码，否则所有操作不可用
+
+    5.使用auth password验证密码：
+    127.0.0.1:6379> auth 123456
+    OK
+    127.0.0.1:6379> config get requirepass
+    1) "requirepass"
+    2) "123456"
+
+三、redis的默认过期时间为永不过期
+
+四、redis队列：
+
+
