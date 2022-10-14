@@ -1,0 +1,3 @@
+参考：http://t.zoukankan.com/lv-lxz-p-11132661.html
+USB连接手机后，若adb devices 没有显示设备
+
