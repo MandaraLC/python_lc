@@ -1,9 +1,9 @@
 import os
-file = "./yc/yc22116_数据2022-10-11.txt"
+file = "./yc/yc22117_数据2022-10-13.txt"
 with open(file, 'r') as f:
     content = f.readlines()
 
-filepath = 'shaixuankill3/kill3_shaixuan_data_116.txt'
+filepath = 'shaixuankill3/kill3_shaixuan_data_117.txt'
 try:
     os.remove(filepath)
 except:
