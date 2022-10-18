@@ -5,7 +5,8 @@ import uiautomator2 as u2
 class Dingdingdaka():
     def __init__(self):
         #usb连接手机
-        self.d = u2.connect_usb("83ffe39b")
+        self.d = u2.connect_usb("abfa90600406")
+        # self.d = u2.connect("http://192.168.1.68")
         #打印设备信息
         print("设备信息：", self.d.device_info)
         #屏幕大小
@@ -19,10 +20,10 @@ class Dingdingdaka():
         # 点亮屏幕
         self.d.screen_on()
         #从下往上滑
-        # x1 = int(self.size[0] * 0.5)
-        # y1 = int(self.size[1] * 0.9)
-        # y2 = int(self.size[1] * 0.15)
-        # self.d.swipe(x1, y1, x1, y2)
+        x1 = int(self.size[0] * 0.5)
+        y1 = int(self.size[1] * 0.9)
+        y2 = int(self.size[1] * 0.15)
+        self.d.swipe(x1, y1, x1, y2)
 
     def opendingding(self):
         '''
@@ -53,11 +54,17 @@ class Dingdingdaka():
         elif int(now) >= int(xbtime):
             print("已下班！可以打卡了")
             #点击下班打卡
-            #self.d.xpath('//*[@resource-id="__react-content"]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[3]/android.view.View[1]').click_exists(timeout=5)
+            self.d.xpath('//*[@resource-id="__react-content"]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[3]/android.view.View[1]').click_exists(timeout=5)
+            time.sleep(1)
+            # 清理缓存
+            #self.d.app_clear("com.alibaba.android.rimet")
         elif int(now) <= int(sbtime):
             print("上班打卡！")
             # 点击下班打卡
-            #self.d.xpath('//*[@resource-id="__react-content"]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[3]/android.view.View[1]').click_exists(timeout=5)
+            self.d.xpath('//*[@resource-id="__react-content"]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[1]/android.view.View[2]/android.view.View[1]/android.view.View[3]/android.view.View[1]').click_exists(timeout=5)
+            time.sleep(1)
+            # 清理缓存
+            #self.d.app_clear("com.alibaba.android.rimet")
 
     def closeapp(self):
         '''
@@ -76,5 +83,7 @@ if __name__ == "__main__":
     ding.screen()
     #钉钉打开
     ding.opendingding()
+    time.sleep(5)
     #退出app
     ding.closeapp()
+

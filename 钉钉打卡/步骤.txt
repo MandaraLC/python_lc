@@ -1,3 +1,6 @@
 参考：http://t.zoukankan.com/lv-lxz-p-11132661.html
 USB连接手机后，若adb devices 没有显示设备
 
+1.首先打开手机的开发者模式；
+
+2.打开usb的调试模式
