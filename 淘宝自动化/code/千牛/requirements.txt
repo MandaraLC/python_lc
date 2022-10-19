@@ -1,0 +1,4 @@
+clicknium==0.1.9
+openpyxl==3.0.9
+pyperclip==1.8.2
+pywinauto==0.6.8

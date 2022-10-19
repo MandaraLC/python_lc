@@ -1,0 +1,11 @@
+/code/*/__pycache__
+/code/*/excel
+/code/*/dist
+/code/*/chromedriver.exe
+/code/chromedriver.exe
+/code/*/build
+/code/*/*.doc
+/code/*/data
+/code/*/*.spec
+/code/淘宝发消息
+/code/淘宝phone
