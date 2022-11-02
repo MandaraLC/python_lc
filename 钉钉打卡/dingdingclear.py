@@ -5,7 +5,8 @@ import uiautomator2 as u2
 class Dingdingdaka():
     def __init__(self):
         #usb连接手机
-        self.d = u2.connect_usb("abfa90600406")
+        # self.d = u2.connect_usb("abfa90600406")
+        self.d = u2.connect_adb_wifi("192.168.1.103:5566")
         # self.d = u2.connect("http://192.168.1.68")
         #打印设备信息
         print("设备信息：", self.d.device_info)

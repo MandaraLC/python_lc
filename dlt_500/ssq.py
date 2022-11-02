@@ -54,5 +54,5 @@ for item in trlist:
 #以w的方式打开文件，写入数据
 fileInput = open("data/data_ssq.txt", "w")
 for item in result_list:
-    fileInput.write(''.join(item['qihao']+":"+item['number'])+"\n")
-    # fileInput.write(''.join(item['number']) + "\n")
+    # fileInput.write(''.join(item['qihao']+":"+item['number'])+"\n")
+    fileInput.write(''.join(item['number']) + "\n")

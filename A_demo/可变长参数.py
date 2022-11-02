@@ -8,4 +8,4 @@ def length_param(*args, **kwargs):
     print("args=", args)
     print("kwargs=", kwargs)
 
-length_param("zim", b="this", c="is", d="good")
+length_param("zim", 'aaa', b="this", c="is", d="good")

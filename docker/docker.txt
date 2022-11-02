@@ -104,8 +104,6 @@ sh start.sh
 
 docker run -it -p 8760:8760 --rm --name docker_yl_maersk_cosco8760 -v "/home/liucheng/code/:/data" --shm-size="2g" -d yl_cosco_maersk:1.0.2 sh start.sh
 
-
-
 ******上传镜像docker hub*******
 1.docker ps -a #查看容器 得到container id
 
@@ -115,25 +113,4 @@ docker run -it -p 8760:8760 --rm --name docker_yl_maersk_cosco8760 -v "/home/liu
 #docker commit -m "提交信息" -a "作者" 容器id 仓库名称:标签
 
 4.docker push liuchengelse/project:v1.0.0
-
 ******The End*******
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
