@@ -22,7 +22,7 @@ class Mengchong():
         """定义一个监控器"""
         # 监控器会单独的起一个线程
         # 用户隐私协议
-        self.d.watcher.when('//android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]').click()
+        self.d.watcher.when('').click()
         # 监控器写好之后，要通过start方法来启动
         self.d.watcher.start()
 
@@ -78,7 +78,7 @@ class Mengchong():
                     time.sleep(1)
                     self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').click_exists(timeout=2)
                     time.sleep(1)
-                    self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').set_text("你在干嘛呢")
+                    self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').set_text("你在干嘛呢，下班了吗")
                     #点击发送
                     self.d.click(0.781, 0.824)
                     time.sleep(1)
@@ -89,13 +89,16 @@ class Mengchong():
                         self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/iv_top_left"]').click_exists(timeout=2)
                     except:
                         pass
+                    try:
+                        self.d.xpath('//android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]').click_exists(timeout=2)
+                    except:
+                        pass
                     print("报错", e)
             x1 = int(self.size[0] * 0.5)
             y1 = int(self.size[1] * 0.9)
             y2 = int(self.size[1] * 0.15)
             self.d.swipe(x1, y1, x1, y2)  # 从下往上滑动
             time.sleep(2)
-
 
 if __name__ == "__main__":
     mengchong = Mengchong()
