@@ -3,7 +3,7 @@
 
 '''
 
-a = lambda x, y : x + y
+a = lambda x, y : x + y * x - x
 
 print(a(1,2))
 

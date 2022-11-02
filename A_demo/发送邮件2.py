@@ -24,7 +24,6 @@ def sendemail(subject, filepath, filename, reciver):
     smtpObj.sendmail(config.SENDER, [reciver], msg.as_string())
     smtpObj.close()
 
-
 filename = 'test1.txt'
 filepath = f'./{filename}'
 for i in config.RECIVER:
