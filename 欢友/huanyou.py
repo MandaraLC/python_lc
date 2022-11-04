@@ -1,12 +1,17 @@
 '''
-uiautomator2 怎么wifi连接手机，参考：
+一、uiautomator2 怎么wifi连接手机，参考：
 https://www.jianshu.com/p/ea633818247c
+1.usb连接到电脑，执行adb tcpip 5566 (执行结果：restarting in TCP mode port: 5566 )
+2.断开USB，执行adb connect 192.168.1.103:5566 （192.168.1.103是手机的局域网IP地址）
+3.u2.connect_adb_wifi("192.168.1.103:5566")
+
+二、获取正在运行的app的包名：
+adb shell dumpsys window | findstr mCurrentFocus
 '''
 import time
 import uiautomator2 as u2
 
-
-class Mengchong():
+class Huanyou():
     def __init__(self):
         #usb连接手机
         # self.d = u2.connect_usb("83ffe39b")
@@ -76,9 +81,12 @@ class Mengchong():
                     self.d.screen_on()
                     self.d.xpath(f'//*[@resource-id="com.sh.shuihulu.kiwi:id/recyclerview"]/android.widget.LinearLayout[{i+1}]/android.view.ViewGroup[1]').click_exists(timeout=2)
                     time.sleep(1)
+                    #self.d.click(0.515, 0.554)
+                    self.d(text="我知道了").click_exists(timeout=1)
+                    time.sleep(0.2)
                     self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').click_exists(timeout=2)
                     time.sleep(1)
-                    self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').set_text("你在干嘛呢，下班了吗")
+                    self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').set_text("下班吃饭了没得~")
                     #点击发送
                     self.d.click(0.781, 0.824)
                     time.sleep(1)
@@ -89,11 +97,8 @@ class Mengchong():
                         self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/iv_top_left"]').click_exists(timeout=2)
                     except:
                         pass
-                    try:
-                        self.d.xpath('//android.widget.RelativeLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]').click_exists(timeout=2)
-                    except:
-                        pass
                     print("报错", e)
+                    break
             x1 = int(self.size[0] * 0.5)
             y1 = int(self.size[1] * 0.9)
             y2 = int(self.size[1] * 0.15)
@@ -101,10 +106,10 @@ class Mengchong():
             time.sleep(2)
 
 if __name__ == "__main__":
-    mengchong = Mengchong()
+    huanyou = Huanyou()
     #打开屏幕
-    mengchong.screen()
+    huanyou.screen()
     #打开app
-    # mengchong.openmengchong()
+    # huanyou.openmengchong()
     # 执行程序
-    mengchong.doit()
+    huanyou.doit()
