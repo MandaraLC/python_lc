@@ -44,12 +44,3 @@ list0 = list_split(matchobj1, 5)
 fileInput = open("data.txt", "w")
 for item in list0:
     fileInput.write(','.join(item)+"\n")
-
-
-
-
-
-
-
-
-

@@ -62,5 +62,3 @@ if __name__ == "__main__":
     time.sleep(2)
     #打卡淘特
     ding.opentaote()
-
-

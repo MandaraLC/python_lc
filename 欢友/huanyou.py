@@ -86,7 +86,7 @@ class Huanyou():
                     time.sleep(0.2)
                     self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').click_exists(timeout=2)
                     time.sleep(1)
-                    self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').set_text("下班吃饭了没得~")
+                    self.d.xpath('//*[@resource-id="com.sh.shuihulu.kiwi:id/all_et_content_container"]').set_text("吃午饭了吗~")
                     #点击发送
                     self.d.click(0.781, 0.824)
                     time.sleep(1)
