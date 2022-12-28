@@ -5,7 +5,10 @@ docker pull redis
 docker images
 
 3.创建文件夹
-
+mkdir -p /home/redis
+mkdir -p /home/redis/data
+vi /home/redis/redis.conf
+写入配置信息（请查看当前目录下的redis.conf）
 
 4.创建容器
 docker run --privileged=true -p 6379:6379 --name myredis -v /home/redis/redis.conf:/etc/redis/redis.conf
