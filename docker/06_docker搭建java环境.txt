@@ -1,7 +1,23 @@
-1.拉取java镜像
+1.查找镜像
+docker search java
+输出：
+INDEX       NAME                                           DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+docker.io   docker.io/node                                 Node.js is a JavaScript-based platform for...   12222     [OK]
+docker.io   docker.io/tomcat                               Apache Tomcat is an open source implementa...   3458      [OK]
+docker.io   docker.io/java                                 DEPRECATED; use "openjdk" (or other JDK im...   1976      [OK]
+docker.io   docker.io/ghost                                Ghost is a free and open source blogging p...   1582      [OK]
+docker.io   docker.io/couchdb                              CouchDB is a database that uses JSON for d...   500       [OK]
+docker.io   docker.io/jetty                                Jetty provides a Web server and javax.serv...   387       [OK]
+docker.io   docker.io/amazoncorretto                       Corretto is a no-cost, production-ready di...   267       [OK]
+docker.io   docker.io/groovy                               Apache Groovy is a multi-faceted language ...   137       [OK]
+docker.io   docker.io/circleci/node                        Node.js is a JavaScript-based platform for...   130
+docker.io   docker.io/ibmjava                              Official IBM® SDK, Java™ Technology Editio...   107       [OK]
+docker.io   docker.io/tomee                                Apache TomEE is an all-Apache Java EE cert...   100       [OK]
+docker.io   docker.io/ibmcom/ibmjava                       IBM® SDK, Java™ Technology Edition Docker ...   21
+docker.io   docker.io/bitnami/java                         Bitnami Java Docker Image                       13                   [OK]
+
+2.拉取java镜像
 docker pull java
 
-2.查看所有镜像
+3.查看所有镜像
 docker images
-
-3.

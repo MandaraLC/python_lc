@@ -1,0 +1,85 @@
+1.拉取镜像
+docker pull redis
+
+2.查看镜像
+docker images
+
+3.创建文件夹
+
+
+4.创建容器
+docker run --privileged=true -p 6379:6379 --name myredis -v /home/redis/redis.conf:/etc/redis/redis.conf
+-v /home/redis/data:/data -d redis redis-server /etc/redis/redis.conf  --appendonly yes  --requirepass 123456
+参数解释：
+--privileged=true 提升权限
+--restart=always 当重启docker时，这个容器也自动启动
+/etc/redis/redis.conf 配置文件路径
+-p 6379:6379 端口映射
+--appendonly yes 开启redis持久化
+--requirepass 000415 设置密码（如果你是通过docker 容器内部连接的话，就随意，可设可不设。但是如果想向外开放的话，一定要设置）
+
+5.查看日志：
+docker logs --since 30m myredis
+--since 30m 是查看此容器30分钟之内的日志情况
+
+输出：
+1:C 28 Dec 2022 13:52:20.067 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 28 Dec 2022 13:52:20.067 # Redis version=7.0.7, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 28 Dec 2022 13:52:20.067 # Configuration loaded
+1:M 28 Dec 2022 13:52:20.067 * monotonic clock: POSIX clock_gettime
+                _._
+           _.-``__ ''-._
+      _.-``    `.  `_.  ''-._           Redis 7.0.7 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 1
+  `-._    `-._  `-./  _.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |           https://redis.io
+  `-._    `-._`-.__.-'_.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |
+  `-._    `-._`-.__.-'_.-'    _.-'
+      `-._    `-.__.-'    _.-'
+          `-._        _.-'
+              `-.__.-'
+1:M 28 Dec 2022 13:52:20.068 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+1:M 28 Dec 2022 13:52:20.068 # Server initialized
+1:M 28 Dec 2022 13:52:20.068 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+1:M 28 Dec 2022 13:52:20.069 * Creating AOF base file appendonly.aof.1.base.rdb on server start
+1:M 28 Dec 2022 13:52:20.070 * Creating AOF incr file appendonly.aof.1.incr.aof on server start
+1:M 28 Dec 2022 13:52:20.070 * Ready to accept connections
+
+6.进入容器
+docker exec -it 83926bd72d0e /bin/bash
+
+7.验证redis
+输入：redis-cli
+
+root@83926bd72d0e:/data# redis-cli
+127.0.0.1:6379> get aaa
+(error) NOAUTH Authentication required.
+127.0.0.1:6379>
+需要密码验证
+127.0.0.1:6379> auth 123456
+OK
+127.0.0.1:6379> config get requirepass
+1) "requirepass"
+2) "123456"
+127.0.0.1:6379>
+
+此时redis已经安装成功！
+
+8.本地验证
+(1)启动redis-server(首先你本地电脑要装有redis服务)
+(2)打开cmd
+(3)远程链接redis: redis-cli -h 192.168.245.130 -p 6379
+(4)链接成功后验证密码：auth 123456
+(5)设置缓存：set bbb test
+(6)获取缓存：get bbb  #输出"test"
+(7)进入容器：
+docker exec -it 容器id /bin/bash
+redis-cli
+get bbb
+也输出："test"

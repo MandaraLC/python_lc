@@ -27,7 +27,7 @@ docker ps -a
 
 ### 3.容器的启动、停止、重启
 ```
-docker start/top 容器名或容器ID
+docker start/stop/restart 容器名或容器ID
 ```
 
 ### 4.进入容器
