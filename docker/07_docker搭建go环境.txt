@@ -1,0 +1,43 @@
+1.拉取镜像
+docker pull golang
+
+2.创建容器
+docker run -it -d --name golang-env-test --privileged=true -v /home/gowww:/go -p 5556:5556 golang
+
+3.进入容器
+docker exec -it 容器id /bin/bash
+
+4.查看版本 env
+go version
+go env
+
+5.配置env
+go env -w GO111MODULE=on
+go env -w GOPROXY="https://goproxy.cn"
+go env -w GOPATH="/go"
+
+6.创建文件helloworld.go
+cd /home/gowww/
+vi helloworld.go
+写入：
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, World!")
+}
+
+:wq
+
+7.进入容器运行
+go run helloworld.go
+结果是：Hello, World!
+
+8.容器报错查看日志
+docker logs 容器id
+
+
+
+
+

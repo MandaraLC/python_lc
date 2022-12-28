@@ -28,7 +28,7 @@ html = etree.HTML(respone1.text)
 qihao = join_list(html.xpath("//input[@id='end']/@value"))
 print("pl3最新：", qihao)
 
-url = f'https://datachart.500.com/pls/history/inc/history.php?limit=1000&end={qihao}'
+url = f'https://datachart.500.com/pls/history/inc/history.php?limit=6000&end={qihao}'
 print(url)
 respone = client.get(url=url, headers=header)
 respone_decode = respone.text
@@ -38,8 +38,6 @@ trlist = html.xpath("//div[@class='chart']/table/tr")
 
 result_list = []
 for key,item in enumerate(trlist):
-    # print(key)
-    # print(item)
     if key > 1:
         result_list.append(
             {

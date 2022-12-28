@@ -1,0 +1,76 @@
+参考:https://blog.csdn.net/qq_37861615/article/details/124984684
+
+docker pull php:7.4-fpm
+
+1.创建php容器
+docker run -d --name php7-test --privileged=true -v /home/php7:/www/myphp  php:7.4-fpm
+
+2.创建文件：
+vi phpinfo.php
+<?php
+echo 123;
+:wq
+
+3.docker exec -it 镜像id /bin/bash
+
+4.cd /www/myphp
+ls
+会看到phpinfo.php
+
+5.执行php phpinfo.php
+输出123
+表示这个容器创建成功！
+
+6.创建nginx容器并关联php容器（和创建nginx容器类似，只不过加了--link）
+
+docker run -d --privileged=true --name nignx-test-1 -p 8081:80 -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+-v /home/nginx/html:/usr/share/nginx/html -v /home/nginx/logs:/var/log/nginx --link php7-test:php nginx
+
+--link php7-test:php
+--link 可以通过容器名互相通信，容器间共享环境变量。
+--link 主要用来解决两个容器通过ip地址连接时容器ip地址会变的问题
+php7-test:php    php7-test这是php容器的名称，php是镜像名
+
+7.此时访问
+http://192.168.245.130:8081/phpinfo.php
+也输出123（文件位置：/home/php7/phpinfo.php）
+说明两个容器关联成功
+同时/home/nginx/html下的html文件也是可以访问的
+http://192.168.245.130:8081/helloworld.html
+显示hello world
+
+
+8.nginx.conf的server段配置
+server {
+    listen       80;
+    server_name  localhost; #这里修改成自己的域名，我这里是本地运行所以填的localhost
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm index.php;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+  #当请求网站下php文件的时候，反向代理到php-fpm
+    location ~ \.php$ {
+        fastcgi_pass   php:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  /www/myphp/$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}
+
+9.如何修改php配置memory_limit=2048M
+docker exec -it 容器id /bin/bash
+cd /usr/local/etc/php/conf.d
+vi upload.ini
+写入memory_limit=2048M
+:wq
+****** 若没有vi命令 *******
+apt-get update
+apt-get install vim
+
+改完后退出容器并重启容器，然后检查phpinfo，配置是否修改过来

@@ -49,7 +49,7 @@ docker run -it --rm --name nginx-test -v /data/docker-test:/data -p 80:80 docker
 解决：
     1.在运行容器的时候，给容器加特权，及加上 --privileged=true 参数：
     docker run -itd -v /data/dockerfile:/data/dockerfile --privileged=true --name nginx nginx
-    2.临时关闭selinux：
+    2.临时关闭seli nux：
     setenforce 0
     3.添加selinux规则，改变要挂载的目录的安全性文本
 

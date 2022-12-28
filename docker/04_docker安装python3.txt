@@ -1,0 +1,23 @@
+1.拉取镜像
+docker pull python:latest
+
+2.查看镜像
+docker images
+
+3.新建文件
+mkdir -p /home/python3
+cd /home/python3
+vi demo.py
+写入print("hello world")
+:wq
+
+4.构建容器
+docker run -it --privileged=true --name python3-test -v /home/python3:/usr/src/python3 -p 8889:8889 -d python
+
+5.进入容器
+docker exec -it 容器id /bin/bash
+
+6.运行程序
+cd /usr/src/python3
+python demo.py
+#打印出hello world

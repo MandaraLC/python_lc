@@ -1,0 +1,7 @@
+1.拉取java镜像
+docker pull java
+
+2.查看所有镜像
+docker images
+
+3.

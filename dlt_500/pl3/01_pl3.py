@@ -23,7 +23,3 @@ for a in alllist:
 print(f"和值，共{len(hezhi)}", hezhi)
 print(f"和值，共{len(list(set(hezhi)))}", list(set(hezhi)))
 print("1000/28="+str(1000/28))
-'''
-去掉和值=0
-
-'''

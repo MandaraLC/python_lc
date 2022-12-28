@@ -19,7 +19,6 @@ git push origin master
 #GitHub代码上传失败的解决方法
 https://blog.csdn.net/weixin_43624626/article/details/123257465
 
-
 标签tag：
 
 1.创建本地tag
@@ -33,3 +32,27 @@ https://blog.csdn.net/weixin_43624626/article/details/123257465
 4.删除标签
     git tag -d 标签名 #删除本地标签
     git push origin :refs/tags/标签名 #删除远程tag
+
+
+####################如何创建一个分支，并拉取master分支进行开发##################
+
+参考：https://blog.csdn.net/ww2331544645/article/details/117437649
+
+1.切换到master分支：git checkout master
+
+2.创建分支：git checkout -b master-slave
+这样新建的分支：是以master源码为基础新建的分支
+
+3.开始开发代码，开发完成后
+git add .
+git commit -m "信息"
+git push origin master-slave
+
+4.合并代码：
+git checkout master
+git merge master-slave
+git push origin master
+
+5.删除本地分支和远程分支
+删除本地仓库： git branch -d master-slave
+删除个人远程仓库：git push origin :master-slave

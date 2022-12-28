@@ -55,7 +55,6 @@ class Taotedaka():
             time.sleep(10)
 
 if __name__ == "__main__":
-
     ding = Taotedaka()
     # 打开屏幕
     ding.screen()

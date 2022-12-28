@@ -1,0 +1,33 @@
+1.拉取mysql镜像
+docker pull mysql
+
+2.创建文件夹
+mkdir -p /home/mysql/conf
+mkdir -p /home/mysql/data
+
+3.创建容器
+docker run -d -it --name mysql-test -p 3306:3306 --privileged=true -v /home/mysql/log:/var/log/mysql
+-v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql
+说明：
+/home/mysql/log 日志文件挂载
+/home/mysql/conf 配置文件挂载
+/home/mysql/data 数据文件挂载
+-e MYSQL_ROOT_PASSWORD=123456 指定环境变量（指定mysql密码）
+
+4.进入容器
+docker exec -it 容器id /bin/bash
+
+5.测试连接数据库
+mysql -uroot -p123456
+进入后：
+show databases
+可以看到所有数据库
+
+6.也可以用navicat测试连接
+ip可以用ifconfig查看，我的局域网ip是：192.168.245.130
+端口:3306
+用户:root
+密码:123456
+连接成功！
+
+测试你就可以创建数据库和数据表啦！

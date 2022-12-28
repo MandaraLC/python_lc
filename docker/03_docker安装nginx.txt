@@ -1,0 +1,50 @@
+参考：https://www.cnblogs.com/yiminlin/p/15951587.html
+
+1.查看可用版本
+docker search nginx
+
+2.拉取最新版本的镜像
+docker pull nginx:latest
+
+3.查看本地镜像
+docker images
+
+4.运行容器
+docker run -it --name nginx-test -p 8080:80 -d nginx
+
+
+运行成功后访问：
+http://192.168.245.130:8080/
+
+5.进入容器：
+docker exec -it 9248d51c2cd0 /bin/bash
+nginx的html目录在/usr/share/nginx/html下
+安装vim
+apt-get update
+apt-get install vim
+
+#############################以上是没有配置挂载目录############################
+
+下面将设置挂载目录：
+参考：
+https://blog.csdn.net/enhengguodong/article/details/119920882
+
+mkdir -p /home/nginx/html
+mkdir -p /home/nginx/conf
+mkdir -p /home/nginx/log
+cd /home/nginx/conf
+vi nginx.conf
+写入配置并 :wq
+
+开始运行容器：
+docker run -d --privileged=true --name nignx-test-2 -p 8080:80 -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /home/nginx/html:/usr/share/nginx/html -v /home/nginx/logs:/var/log/nginx nginx
+
+-d 后台运行
+--privileged=true 这个参数需要加上 不然会没有权限
+--name nignx-test-2 容器名称
+-p 8080:80 端口映射
+-v 文件映射（可指定多个）
+nginx 镜像名称
+
+运行成功后访问：
+http://192.168.245.130:8080/

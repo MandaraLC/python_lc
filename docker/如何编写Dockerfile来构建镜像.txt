@@ -1,0 +1,10 @@
+1.使用 Dockerfile 创建镜像
+docker build
+--tag, -t: 镜像的名字及标签，通常 name:tag 或者 name 格式；可以在一次构建中为一个镜像设置多个标签。
+
+docker build -t runoob/ubuntu:v1 .  #使用当前目录的 Dockerfile 创建镜像，标签为 runoob/ubuntu:v1
+docker build -f /path/to/a/Dockerfile .   #-f 指定Dockerfile的路径
+
+2.Dockerfile #Dockerfile 是一个用来构建镜像的文本文件，文本内容包含了一条条构建镜像所需的指令和说明。
+
+
