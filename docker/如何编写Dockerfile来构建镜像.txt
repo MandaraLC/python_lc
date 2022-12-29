@@ -7,4 +7,74 @@ docker build -f /path/to/a/Dockerfile .   #-f 指定Dockerfile的路径
 
 2.Dockerfile #Dockerfile 是一个用来构建镜像的文本文件，文本内容包含了一条条构建镜像所需的指令和说明。
 
+3.指令
+3.1
+    FROM
+    表示构建的镜像来自哪个镜像
+    必须是这个Dockerfile第一句有效指令
+    例子：FROM python
 
+3.2
+    COPY
+    将本地的文件或者文件夹，复制到镜像的指定路径下，类似于docker cp
+    例子：COPY test.py /usr/src/python3
+
+3.3
+    ADD
+    与COPY作用类似
+    在相同的复制命令下，使用ADD构建镜像的大小比COPY构建的镜像要大，所以如果只是单纯的复制文件尽可能用COPY。
+    例子：ADD file/conf /usr/local/nginx/conf/
+
+3.4
+    RUN
+    用来在Docker的编译环境中运行指定命令。其会在shell或者exec的环境下执行命令
+    格式1：RUN shell命令
+    格式2：RUN ["程序名", "参数1", "参数2"，……]
+    例子1：RUN pip install pyinstaller
+    例子2：RUN ["python", "run.py"]
+
+3.5
+    CMD
+    Dockerfile只允许使用一次CMD指令，如果有多个CMD指令时只有最后一个指令生效
+    CMD ["executable"，"param1", "param2"]
+    CMD ["python", "run.py"]
+
+3.6
+    WORKDIR
+    该指令指定RUN、CMD与ENTRYPOINT命令的工作目录。同时，可以通过docker run -w标志在运行时覆盖指令指定的目录。
+    例子：WORKDIR /data
+
+3.7
+    LABEL
+    将元数据添加到镜像
+    可以为生成的镜像添加元数据标签信息，这些信息可以用来辅助过滤出特定镜像
+    LABEL version="1.0"
+    LABEL multi.label1="value1" \
+      multi.label2="value2" \
+      other="value3"
+    LABEL multi.label1="value1" multi.label2="value2" other="value3"
+
+    通过 docker inspect 查看添加的元数据
+    docker image inspect --format='' python
+
+3.8
+    ENV
+    指定在执行docker run命令运行镜像时，自动设置的环境变量
+    这个环境变量可以在后续任何RUN指令中使用，并在容器运行时保持。而且可以通过docker run命令的-e参数来修改
+    ENV <key> <value>
+    ENV version 1.0
+
+3.9
+    MAINTAINER
+    这条指令主要指定维护者信息，方便他人寻找作者。
+    MAINTAINER <name>
+
+
+Dockerfile构建镜像：
+docker build  -t ImageName:TagName dir
+-t 给镜像加一个Tag
+ImageName 给镜像起的名称
+TagName 给镜像的Tag名
+Dir Dockerfile所在目录
+例子：
+docker build -t python3:v1.0 .
