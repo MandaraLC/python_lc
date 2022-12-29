@@ -1,0 +1,33 @@
+1.拉取镜像
+docker pull httpd
+
+2.创建目录
+mkdir -p  /home/apache/www
+mkdir -p  /home/apache/logs
+mkdir -p  /home/apache/conf
+
+3.创建临时容器
+docker run -itd --name apache-test-linshi -p 9090:80 httpd
+
+4.查看容器id
+docker images
+容器id是：fde9656f340a
+
+5.拷贝容器中的apache的配置文件至/home/apache/conf
+docker cp fde9656f340a:/usr/local/apache2/conf/httpd.conf /home/apache/conf
+
+6.删除临时容器
+docker stop fde9656f340a
+docker rm fde9656f340a
+
+7.创建容器
+docker run -itd -p 8082:80 --restart=always --privileged=true --name apache-test -v /home/apache/www:/usr/local/apache2/htdocs -v /home/apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf -v /home/apache/logs:/usr/local/apache2/logs httpd
+
+8.创建index.html
+vi index.html
+写入
+hello apache!
+:wq
+
+9.浏览器访问http://192.168.245.130:8082/
+正常显示hello apache!
