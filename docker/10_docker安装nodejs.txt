@@ -1,0 +1,24 @@
+1.拉取nodejs镜像
+docker pull node
+mkdir -p /home/nodejs
+
+2.创建运行容器
+docker run -itd --name nodejs-test --restart=always --privileged=true -p 7900:7900 -v /home/nodejs:/node_code node
+
+3.进入容器
+docker exec -it 容器id /bin/bash
+
+4.验证nodejs
+root@06d6c2a7cf0b:/# node -v
+v19.3.0
+
+5.创建js文件
+cd /home/nodejs
+vi helloworld.js
+写入
+console.log("123");
+进入容器目录 /node_code
+执行node helloworld.js
+输出：123
+
+
