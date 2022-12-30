@@ -3,7 +3,7 @@
 docker pull php:7.4-fpm
 
 1.创建php容器
-docker run -d --name php7-test --privileged=true -v /home/php7:/www/myphp  php:7.4-fpm
+docker run -d --name php7-test --restart=always --privileged=true -v /home/php7:/www/myphp  php:7.4-fpm
 
 2.创建文件：
 vi phpinfo.php
@@ -23,8 +23,7 @@ ls
 
 6.创建nginx容器并关联php容器（和创建nginx容器类似，只不过加了--link）
 
-docker run -d --privileged=true --name nignx-test-1 -p 8081:80 -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
--v /home/nginx/html:/usr/share/nginx/html -v /home/nginx/logs:/var/log/nginx --link php7-test:php nginx
+docker run -d --privileged=true --restart=always --name nignx-test-1 -p 8081:80 -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /home/nginx/html:/usr/share/nginx/html -v /home/nginx/logs:/var/log/nginx --link php7-test:php nginx
 
 --link php7-test:php
 --link 可以通过容器名互相通信，容器间共享环境变量。

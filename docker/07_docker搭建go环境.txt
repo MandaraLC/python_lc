@@ -2,7 +2,7 @@
 docker pull golang
 
 2.创建容器
-docker run -it -d --name golang-env-test --privileged=true -v /home/gowww:/go -p 5556:5556 golang
+docker run -it -d --name golang-env-test --restart=always --privileged=true -v /home/gowww:/go -p 5556:5556 golang
 
 3.进入容器
 docker exec -it 容器id /bin/bash

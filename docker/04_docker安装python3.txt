@@ -12,7 +12,7 @@ vi demo.py
 :wq
 
 4.构建容器
-docker run -it --privileged=true --name python3-test -v /home/python3:/usr/src/python3 -p 8889:8889 -d python
+docker run -it --privileged=true --restart=always --name python3-test -v /home/python3:/usr/src/python3 -p 8889:8889 -d python
 
 5.进入容器
 docker exec -it 容器id /bin/bash

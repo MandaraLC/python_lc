@@ -69,7 +69,6 @@ docker build -f /path/to/a/Dockerfile .   #-f 指定Dockerfile的路径
     这条指令主要指定维护者信息，方便他人寻找作者。
     MAINTAINER <name>
 
-
 Dockerfile构建镜像：
 docker build  -t ImageName:TagName dir
 -t 给镜像加一个Tag
