@@ -31,3 +31,4 @@ hello apache!
 
 9.浏览器访问http://192.168.245.130:8082/
 正常显示hello apache!
+

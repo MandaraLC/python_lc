@@ -3,7 +3,7 @@
 docker pull php:7.4-fpm
 
 1.创建php容器
-docker run -d --name php7-test --restart=always --privileged=true -v /home/php7:/www/myphp  php:7.4-fpm
+docker run -d --name php7-test -p 9001:9001 --restart=always --privileged=true -v /home/php7:/www/myphp php:7.4-fpm
 
 2.创建文件：
 vi phpinfo.php

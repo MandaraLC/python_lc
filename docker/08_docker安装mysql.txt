@@ -6,7 +6,8 @@ mkdir -p /home/mysql/conf
 mkdir -p /home/mysql/data
 
 3.创建容器
-docker run -d -it --name mysql-test -p 3306:3306 --restart=always --privileged=true -v /home/mysql/log:/var/log/mysql -v /home/mysql/conf:/etc/mysql/conf.d -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql
+docker run -d -it --name mysql-test -p 3306:3306 --restart=always --privileged=true -v /home/mysql/log:/var/log/mysql
+-v /home/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf -v /home/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 mysql
 说明：
 /home/mysql/log 日志文件挂载
 /home/mysql/conf 配置文件挂载
