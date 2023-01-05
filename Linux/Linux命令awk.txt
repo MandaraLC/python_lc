@@ -1,0 +1,60 @@
+基本格式：awk [选项] '脚本命令' 文件名
+
+'匹配规则{执行命令}'
+
+-F :	指定以 : 作为输入行的分隔符，awk 命令默认分隔符为空格或制表符。
+-f file	从脚本文件中读取 awk 脚本指令，以取代直接在命令行中输入指令。
+-v var=val	在执行处理过程之前，设置一个变量 var，并给其设备初始值为 val。
+
+一、awk 使用数据字段变量
+awk 的主要特性之一是其处理文本文件中数据的能力，它会自动给一行中的每个数据元素分配一个变量。
+默认情况下，awk 会将如下变量分配给它在文本行中发现的数据字段：
+$0 代表整个文本行；
+$1 代表文本行中的第 1 个数据字段；
+$2 代表文本行中的第 2 个数据字段；
+$n 代表文本行中的第 n 个数据字段。
+
+前面说过，在 awk 中，默认的字段分隔符是任意的空白字符（例如空格或制表符）。
+在文本行中，每个数据字段都是通过字段分隔符划分的。awk 在读取一行文本时，会用预定义的字段分隔符划分每个数据字段。
+
+[root@localhost ~]# cat data2.txt
+One line of test text.
+Two lines of test text.
+Three lines of test text.
+[root@localhost ~]# awk '{print $1}' data2.txt
+One
+Two
+Three
+
+二、awk 脚本命令使用多个命令
+awk 允许将多条命令组合成一个正常的程序。要在命令行上的程序脚本中使用多条命令，只要在命令之间放个分号即可
+[root@localhost ~]# echo "My name is Rich" | awk '{$4="liucheng"; print $0}'
+My name is liucheng
+
+三、awk从文件中读取程序
+引用awk中的命令
+awk.sh中文本如下：
+{print $1 "'s home directory is " $6}
+
+命令：
+awk -F : -f awk.sh /etc/passwd
+
+-F : ,以:分割每一行的数据
+例如文本如下，以:作为分割，$1就是root,$2就是x,一次类推.....
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+
+-f awk.sh, 读取awk中shell命令
+
+/etc/passwd, 指定文件
+
+这行这条命令得到如下结果：
+root's home directory is /root
+bin's home directory is /bin
+daemon's home directory is /sbin
+adm's home directory is /var/adm
+lp's home directory is /var/spool/lpd
+

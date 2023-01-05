@@ -36,8 +36,3 @@ go run helloworld.go
 
 8.容器报错查看日志
 docker logs 容器id
-
-
-
-
-

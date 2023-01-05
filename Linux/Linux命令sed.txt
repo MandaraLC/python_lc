@@ -1,0 +1,401 @@
+sed 会根据脚本命令来处理文本文件中的数据，这些命令要么从命令行中输入，要么存储在一个文本文件中，此命令执行数据的顺序如下：
+每次仅读取一行内容；
+根据提供的规则命令匹配并修改数据。注意，sed 默认不会直接修改源文件数据，而是会将数据复制到缓冲区中，修改也仅限于缓冲区中的数据；
+将执行结果输出。
+当一行数据匹配完成后，它会继续读取下一行数据，并重复这个过程，直到将文件中所有数据处理完毕。
+
+
+sed 命令的基本格式如下：
+[root@localhost ~]# sed [选项] [脚本命令] 文件名
+
+-e 脚本命令	该选项会将其后跟的脚本命令添加到已有的命令中。
+-f 脚本命令文件	该选项会将其后文件中的脚本命令添加到已有的命令中。
+-n	默认情况下，sed 会在所有的脚本指定执行完毕后，会自动输出处理后的内容，而该选项会屏蔽启动输出，需使用 print 命令来完成输出。
+-i	此选项会直接修改源文件，要慎用。
+
+
+一、sed脚本命令
+(1)sed s 替换脚本命令，可理解为sub（暂代，代替，替补），简写为s
+基本格式：[address]s/pattern/replacement/flags
+address 表示指定要操作的具体行
+pattern 指的是需要替换的内容
+replacement 指的是要替换的新内容
+flags 有点复杂
+    flags标记	功能
+    n	        1~512 之间的数字，表示指定要替换的字符串出现第几次时才进行替换，例如，一行中有 3 个 A，但用户只想替换第二个 A，这是就用到这个标记；
+    g	        对数据中所有匹配到的内容进行替换，如果没有 g，则只会在第一次匹配成功时做替换操作。例如，一行数据中有 3 个 A，则只会替换第一个 A；
+    p	        会打印与替换命令中指定的模式匹配的行。此标记通常与 -n 选项一起使用。
+    w file	    将缓冲区中的内容写到指定的 file 文件中；
+    &	        用正则表达式匹配的内容进行替换；
+    \n	        匹配第 n 个子串，该子串之前在 pattern 中用 \(\) 指定。
+    \	        转义（转义替换部分包含：&、\ 等）。
+
+例子1：
+sed 's/test/trial/2' data4.txt
+将匹配到的每一行第2个test替换成trial
+
+[root@localhost python3]# cat data4.txt
+This is a test of the test script.
+This is the second test of the test script.
+[root@localhost python3]# sed 's/test/trial/2' data4.txt
+This is a test of the trial script.
+This is the second test of the trial script.
+
+
+例子2：
+sed 's/test/trial/g' data4.txt
+将所有匹配到的test替换成trial
+
+[root@localhost python3]# cat data4.txt
+This is a test of the test script.
+This is the second test of the test script.
+[root@localhost python3]# sed 's/test/trial/g' data4.txt
+This is a trial of the trial script.
+This is the second trial of the trial script.
+
+
+例子3：
+sed -n 's/test/trial/p' data5.txt
+-n 选项会禁止 sed 输出，但 p 标记会输出修改过的行，将二者匹配使用的效果就是只输出被替换命令修改过的行
+[root@localhost python3]# cat data5.txt
+This is a test line.
+This is a different line.
+[root@localhost python3]# sed -n 's/test/trial/p' data5.txt
+This is a trial line.
+只会输出修改过的行
+
+
+例子4：
+sed 's/test/trial/w data5_new.txt' data5.txt
+w 标记会将匹配后的结果保存到指定文件data5_new.txt中
+
+[root@localhost python3]# sed 's/test/trial/w data5_new.txt' data5.txt
+This is a trial line.
+This is a different line.
+[root@localhost python3]# cat data5_new.txt
+This is a trial line.
+
+
+(2)sed d 替换脚本命令，可理解为delete的简写d
+格式：[address]d
+如果需要删除文本中的特定行，可以用 d 脚本命令，它会删除指定行中的所有内容。但使用该命令时要特别小心，如果你忘记指定具体行的话，文件中的所有内容都会被删除
+
+例子1：
+sed 'd' data1.txt
+
+[root@localhost python3]# cat data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+3The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+[root@localhost python3]# sed 'd' data1.txt
+
+删除第3行
+[root@localhost python3]# sed '3d' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+
+删除第2、3行
+[root@localhost python3]# sed '2,3d' data1.txt
+1The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+
+删除两个指定行之间的所有行（包括指定的行）
+[root@localhost python3]# sed '/1/,/3/d' data1.txt
+4The quick brown fox jumps over the lazy dog
+
+删除从第 3 行开始的所有的内容
+[root@localhost python3]# sed '3,$d' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+
+
+(3)sed a 和 i 脚本命令，可理解为append和insert的简写a和i
+a 命令表示在指定行的后面附加一行，
+i 命令表示在指定行的前面插入一行，
+这里之所以要同时介绍这 2 个脚本命令，因为它们的基本格式完全相同
+
+例子1：
+
+在第3行之前插入：
+[root@localhost python3]# sed '3i\
+> This is a dog.' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+This is a dog.
+3The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+
+在第3行后插入：
+[root@localhost python3]# sed '3a\
+> this is a test.' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+3The quick brown fox jumps over the lazy dog
+this is a test.
+4The quick brown fox jumps over the lazy dog
+
+插入多行数据，需要再每一行后面加上反斜杠，最后一行不加
+[root@localhost python3]# sed '3i\
+> aaa\
+> bbb' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+aaa
+bbb
+3The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+
+
+(4)sed c 替换脚本命令(也是替换，替换整行)
+c 命令表示将指定行中的所有内容，替换成该选项后面的字符串
+格式：[address]c\用于替换的新文本
+
+例子：
+
+将第2行替换为hello world!：
+[root@localhost python3]# sed '2c\
+> hello world!' data1.txt
+1The quick brown fox jumps over the lazy dog
+hello world!
+3The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+
+
+(5)sed y 转换脚本命令（也是替换，替换单个字符）
+y 转换命令是唯一可以处理单个字符的 sed 脚本命令
+格式：[address]y/inchars/outchars/
+解释：
+转换命令会对 inchars 和 outchars 值进行一对一的映射，
+即 inchars 中的第一个字符会被转换为 outchars 中的第一个字符，
+第二个字符会被转换成 outchars 中的第二个字符...
+这个映射过程会一直持续到处理完指定字符。
+如果 inchars 和 outchars 的长度不同，则 sed 会产生一条错误消息
+
+例子：
+将1替换成7，将2替换成8，将3替换成9
+sed 'y/123/789/' data8.txt
+
+[root@localhost data]# cat data8.txt
+This is line number 1.
+This is line number 2.
+This is line number 3.
+This is line number 4.
+This is line number 1 again.
+This is yet another line.
+This is the last line in the file.
+[root@localhost data]# sed 'y/123/789/' data8.txt
+This is line number 7.
+This is line number 8.
+This is line number 9.
+This is line number 4.
+This is line number 7 again.
+This is yet another line.
+This is the last line in the file.
+
+例子2：
+[root@localhost data]# echo "This 1 is a test of 1 try." | sed 'y/123/456/'
+This 4 is a test of 4 try.
+
+
+(6)sed p 打印脚本命令
+p 命令表示搜索符号条件的行，并输出该行的内容
+格式：[address]p
+p 命令常见的用法是打印包含匹配文本模式的行
+
+例子：
+用 -n 选项和 p 命令配合使用，我们可以禁止输出其他行，只打印包含匹配文本模式的行
+[root@localhost data]# cat data6.txt
+This is line number 1.
+This is line number 2.
+This is line number 3.
+This is line number 4.
+[root@localhost data]# sed -n '/number 3/p' data6.txt
+This is line number 3.
+
+
+(7)sed w 脚本命令，写入write，简写w
+[address]w filename
+这里的 filename 表示文件名，可以使用相对路径或绝对路径，但不管是哪种，运行 sed 命令的用户都必须有文件的写权限。
+
+例子：
+将文件data6.txt的1,2行写入文件test.txt
+sed '1,2w test.txt' data6.txt
+
+[root@localhost data]# cat data6.txt
+This is line number 1.
+This is line number 2.
+This is line number 3.
+This is line number 4.
+[root@localhost data]# sed '1,2w test.txt' data6.txt
+This is line number 1.
+This is line number 2.
+This is line number 3.
+This is line number 4.
+[root@localhost data]# cat test.txt
+This is line number 1.
+This is line number 2.
+
+例子2：
+如果不想让行直接输出，可以用 -n 选项
+sed -n '/Browncoat/w Browncoats.txt' data11.txt
+
+[root@localhost data]# cat data11.txt
+Blum, R       Browncoat
+McGuiness, A  Alliance
+Bresnahan, C  Browncoat
+Harken, C     Alliance
+[root@localhost data]# sed -n '/Browncoat/w Browncoats.txt' data11.txt
+[root@localhost data]# cat Browncoats.txt
+Blum, R       Browncoat
+Bresnahan, C  Browncoat
+
+
+(8)sed r 脚本命令
+r 命令用于将一个独立文件的数据插入到当前数据流的指定位置
+[address]r filename
+sed 命令会将 filename 文件中的内容插入到 address 指定行的后面
+
+例子：
+sed '3r test.txt' hello.txt
+将test.txt中的内容插入到hello.txt的第3行之后
+
+[root@localhost data]# cat test.txt
+This is line number 1.
+This is line number 2.
+[root@localhost data]# cat hello.txt
+Hello xiaohong 1999
+Hello xiao hong 1999
+Hello xiaoming 1992
+Hello xiao ming 1992
+[root@localhost data]# sed '3r test.txt' hello.txt
+Hello xiaohong 1999
+Hello xiao hong 1999
+Hello xiaoming 1992
+This is line number 1.
+This is line number 2.
+Hello xiao ming 1992
+
+
+例子2：
+将指定文件中的数据插入到数据流的末尾，可以使用 $ 地址符
+sed '$r test.txt' hello.txt
+将test.txt的内容插入到hello.txt文件末尾
+
+[root@localhost data]# cat test.txt
+This is line number 1.
+This is line number 2.
+[root@localhost data]# cat hello.txt
+Hello xiaohong 1999
+Hello xiao hong 1999
+Hello xiaoming 1992
+Hello xiao ming 1992
+[root@localhost data]# sed '$r test.txt' hello.txt
+Hello xiaohong 1999
+Hello xiao hong 1999
+Hello xiaoming 1992
+Hello xiao ming 1992
+This is line number 1.
+This is line number 2.
+
+
+(9)sed q 退出脚本命令
+q 命令的作用是使 sed 命令在第一次匹配任务结束后，退出 sed 程序，不再进行对后续数据的处理
+
+例子1：
+sed '2q' hello.txt
+sed 命令在打印输出第 2 行之后，就停止了，是 q 命令造成的
+
+[root@localhost data]# cat hello.txt
+Hello xiaohong 1999
+Hello xiao hong 1999
+Hello xiaoming 1992
+Hello xiao ming 1992
+[root@localhost data]# sed '2q' hello.txt
+Hello xiaohong 1999
+Hello xiao hong 1999
+
+
+例子2：
+sed '/number 1/{ s/number 1/number 0/;q; }' test.txt
+使用 q 命令之后，sed 命令会在匹配到 number 1 时，将其替换成 number 0，然后直接退出。
+
+[root@localhost data]# cat test.txt
+This is line number 1.
+This is line number 2.
+[root@localhost data]# sed '/number 1/{ s/number 1/number 0/;q; }' test.txt
+This is line number 0.
+
+
+二、sed 脚本命令的寻址方式
+前面在介绍各个脚本命令时，我们一直忽略了对 address 部分的介绍。
+对各个脚本命令来说，address 用来表明该脚本命令作用到文本中的具体行。
+
+默认情况下，sed 命令会作用于文本数据的所有行。
+如果只想将命令作用于特定行或某些行，则必须写明 address 部分，表示的方法有以下 2 种：
+（1）以数字形式指定行区间；
+（2）用文本模式指定具体行区间。
+
+以上两种形式都可以使用如下这 2 种格式，分别是：
+[address]脚本命令
+或者
+address {
+    多个脚本命令
+}
+
+
+(1)以数字形式指定行区间
+
+例子1：
+sed '2s/dog/cat/' data1.txt
+解释：
+2：[address]第二行
+s：替换，可参考sed s
+/dog/cat/：将dog替换成cat
+data1.txt 指定文件路径
+
+[root@localhost data]# cat data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy dog
+3The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+[root@localhost data]# sed '2s/dog/cat/' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy cat
+3The quick brown fox jumps over the lazy dog
+4The quick brown fox jumps over the lazy dog
+
+例子2：
+sed '2,3s/dog/cat/' data1.txt
+使用了行地址区间
+将2-3行匹配到的dog替换成cat
+[root@localhost data]# sed '2,3s/dog/cat/' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy cat
+3The quick brown fox jumps over the lazy cat
+4The quick brown fox jumps over the lazy dog
+
+例子3：
+sed '2,$s/dog/cat/' data1.txt
+从第2行到结尾将dog替换成cat
+$：代表结尾，跟正则表达式中的$类似
+[root@localhost data]# sed '2,$s/dog/cat/' data1.txt
+1The quick brown fox jumps over the lazy dog
+2The quick brown fox jumps over the lazy cat
+3The quick brown fox jumps over the lazy cat
+4The quick brown fox jumps over the lazy cat
+
+
+(2)用文本模式指定行区间
+sed 允许指定文本模式来过滤出命令要作用的行
+/pattern/command
+
+
+
+
+
+
+
+
+

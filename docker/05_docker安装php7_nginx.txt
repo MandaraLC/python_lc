@@ -53,12 +53,12 @@ server {
         root   /usr/share/nginx/html;
     }
 
-  #当请求网站下php文件的时候，反向代理到php-fpm
+    #当请求网站下php文件的时候，反向代理到php-fpm
     location ~ \.php$ {
-        fastcgi_pass   php:9000;
-        fastcgi_index  index.php;
-        fastcgi_param  SCRIPT_FILENAME  /www/myphp/$fastcgi_script_name;
-        include        fastcgi_params;
+    fastcgi_pass   php:9000;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  /www/myphp/$fastcgi_script_name;
+    include        fastcgi_params;
     }
 }
 
