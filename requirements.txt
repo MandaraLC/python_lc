@@ -1,6 +1,6 @@
 clicknium==0.1.9
 drf_yasg==1.21.4
-fake_useragent==0.1.11
+fake-useragent==1.1.1
 Flask==2.0.3
 Flask_Cors==3.0.10
 httpx==0.22.0
